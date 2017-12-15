@@ -5,7 +5,7 @@ import MemPriority from '../../src/composites/MemPriority';
 import {FAILURE, RUNNING, SUCCESS} from '../../src/constants';
 
 suite('Composite: MemPriority', function() {
-    var getNode = function() {
+    var getNode = function(...args:any[]) {
         var _execute = stub();
 
         for (var i=0; i<arguments.length; i++) {

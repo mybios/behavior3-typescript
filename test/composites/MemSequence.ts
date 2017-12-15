@@ -5,7 +5,7 @@ import MemSequence from '../../src/composites/MemSequence';
 import {RUNNING, SUCCESS, FAILURE} from '../../src/constants';
 
 suite('Composite: MemSequence', function() {
-    var getNode = function() {
+    var getNode = function(...args:any[]) {
         var _execute = stub();
 
         for (var i=0; i<arguments.length; i++) {

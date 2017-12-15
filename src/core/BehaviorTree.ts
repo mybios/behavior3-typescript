@@ -147,8 +147,7 @@ export default class BehaviorTree {
    * @param {Object} data The data structure representing a Behavior Tree.
    * @param {Object} [names] A namespace or dict containing custom nodes.
    **/
-  load(data, names) {
-    names = names || {};
+  load(data, names = {}) {
 
     this.title = data.title || this.title;
     this.description = data.description || this.description;

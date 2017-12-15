@@ -16,7 +16,7 @@ suite('Core: Composite', function() {
         assert.isOk(node.children);
 
         assert.equal(node.category, 'composite');
-        assert.equal(node.children[0], 'child1');
-        assert.equal(node.children[1], 'child2');
+        assert.equal(node.children[0], 'child1' as any);
+        assert.equal(node.children[1], 'child2' as any);
     });
 });

@@ -1,6 +1,7 @@
 import {spy, stub} from 'sinon';
 import BehaviorTree from '../../src/core/BehaviorTree';
 import {assert} from 'chai';
+import BaseNode from '../../src/core/BaseNode';
 
 // load and dump JSON model
 
@@ -39,7 +40,7 @@ suite('Core: Behavior Tree', function() {
                       .returns([]);
 
         tree.id = 'tree1';
-        tree.root = node;
+        tree.root = node as any;
         tree.tick(target, blackboard);
 
         assert.isTrue(node._execute.calledOnce);
@@ -58,7 +59,7 @@ suite('Core: Behavior Tree', function() {
                       .returns([]);
 
         tree.id = 'tree1';
-        tree.root = node;
+        tree.root = node as BaseNode;
         tree.tick(target, blackboard);
 
         var method = blackboard.set.withArgs('openNodes', ['node1', 'node2'], 'tree1');
@@ -93,7 +94,7 @@ suite('Core: Behavior Tree', function() {
 
 
         tree.id = 'tree1';
-        tree.root = root;
+        tree.root = root as BaseNode;
         tree.tick(null, blackboard);
 
         assert.isTrue(node7._close.calledOnce);
@@ -127,7 +128,7 @@ suite('Core: Behavior Tree', function() {
 
 
         tree.id = 'tree1';
-        tree.root = root;
+        tree.root = root as BaseNode;
         tree.tick(null, blackboard);
 
         assert.isFalse(node4._close.called);

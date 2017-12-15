@@ -51,16 +51,16 @@ suite('Core: BaseNode', function() {
         node.enter = spy();
         node.open  = spy();
         node.tick  = stub();
-        node.tick.returns(SUCCESS);
+        (node.tick as any).returns(SUCCESS);
         node.close = spy();
         node.exit  = spy();
         node._execute(tick);
 
-        assert.isTrue(node.enter.withArgs(tick).calledOnce);
-        assert.isTrue(node.open.withArgs(tick).calledOnce);
-        assert.isTrue(node.tick.withArgs(tick).calledOnce);
-        assert.isTrue(node.close.withArgs(tick).calledOnce);
-        assert.isTrue(node.exit.withArgs(tick).calledOnce);
+        assert.isTrue((node.enter as any).withArgs(tick).calledOnce);
+        assert.isTrue((node.open as any).withArgs(tick).calledOnce);
+        assert.isTrue((node.tick as any).withArgs(tick).calledOnce);
+        assert.isTrue((node.close as any).withArgs(tick).calledOnce);
+        assert.isTrue((node.exit as any).withArgs(tick).calledOnce);
     });
 
     test('Execute does not opening a node already open', function() {
@@ -75,7 +75,7 @@ suite('Core: BaseNode', function() {
         node.open  = spy();
         node._execute(tick);
 
-        assert.isTrue(node.open.neverCalledWith(tick));
+        assert.isTrue((node.open as any).neverCalledWith(tick));
     });
 
     test('Execute closing the node that does not returns RUNNING', function() {
@@ -87,10 +87,10 @@ suite('Core: BaseNode', function() {
         node.id = 'node1';
         node.close  = spy();
         node.tick  = stub();
-        node.tick.returns(RUNNING);
+        (node.tick as any).returns(RUNNING);
         node._execute(tick);
 
-        assert.isTrue(node.close.neverCalledWith(tick));
+        assert.isTrue((node.close as any).neverCalledWith(tick));
     });
 
     test('Execute calling tick callbacks', function() {

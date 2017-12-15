@@ -1,3 +1,5 @@
+import BaseNode from "./BaseNode";
+
 /**
  * The Blackboard is the memory structure required by `BehaviorTree` and its
  * nodes. It only have 2 public methods: `set` and `get`. These methods works
@@ -37,10 +39,18 @@
  * @class Blackboard
  **/
 
+export interface TreeMemory
+{
+    nodeMemory     ?: {[key:string]:any},
+    openNodes      ?: BaseNode[],
+    traversalDepth ?: number,
+    traversalCycle ?: number,
+ }  
+
 export default class Blackboard {
 
-  _baseMemory = {};
-  _treeMemory = {};
+  _baseMemory: TreeMemory = {};
+  _treeMemory: {[key:string]:TreeMemory} = {};
   /**
    * Initialization method.
    * @method initialize
@@ -58,7 +68,7 @@ export default class Blackboard {
    * @return {Object} The tree memory.
    * @protected
    **/
-  _getTreeMemory(treeScope) {
+  _getTreeMemory(treeScope ?: string) {
     if (!this._treeMemory[treeScope]) {
       this._treeMemory[treeScope] = {
         'nodeMemory'     : {},
@@ -80,7 +90,7 @@ export default class Blackboard {
    * @return {Object} The node memory.
    * @protected
    **/
-  _getNodeMemory(treeMemory, nodeScope) {
+  _getNodeMemory(treeMemory ?: TreeMemory, nodeScope ?: string) {
     var memory = treeMemory.nodeMemory;
     if (!memory[nodeScope]) {
       memory[nodeScope] = {};
@@ -103,7 +113,7 @@ export default class Blackboard {
    * @return {Object} A memory object.
    * @protected
    **/
-  _getMemory(treeScope, nodeScope) {
+  _getMemory(treeScope ?: string, nodeScope ?: string) {
     var memory = this._baseMemory;
 
     if (treeScope) {
@@ -133,7 +143,7 @@ export default class Blackboard {
    *                           memory.
    * @param {String} nodeScope The node id if accessing the node memory.
    **/
-  set(key, value, treeScope, nodeScope) {
+  set(key : string, value : any, treeScope ?: string, nodeScope ?: string) {
     var memory = this._getMemory(treeScope, nodeScope);
     memory[key] = value;
   }
@@ -154,7 +164,7 @@ export default class Blackboard {
    * @param {String} nodeScope The node id if accessing the node memory.
    * @return {Object} The value stored or undefined.
    **/
-  get(key, treeScope, nodeScope) {
+  get(key : string, treeScope ?: string, nodeScope ?: string) {
     var memory = this._getMemory(treeScope, nodeScope);
     return memory[key];
   }
