@@ -1,4 +1,4 @@
-export const VERSION = '0.2.2';
+export const VERSION = '0.2.3';
 
 export enum STATE
 {
@@ -7,7 +7,7 @@ export enum STATE
     FAILURE = 2,
     RUNNING = 3,
     ERROR = 4,
-}    
+}
 
 export const SUCCESS = STATE.SUCCESS;
 export const FAILURE = STATE.FAILURE;
@@ -16,11 +16,11 @@ export const ERROR = STATE.ERROR;
 
 export enum Category
 {
-  COMPOSITE = 'composite',
-  DECORATOR = 'decorator',
-  ACTION = 'action',
-  CONDITION = 'condition',
-  NONE = '',
+    COMPOSITE = 'composite',
+    DECORATOR = 'decorator',
+    ACTION = 'action',
+    CONDITION = 'condition',
+    NONE = '',
 }
 
 export const COMPOSITE = Category.COMPOSITE;

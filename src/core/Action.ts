@@ -1,5 +1,5 @@
-import BaseNode from '../core/BaseNode';
-import {ACTION} from '../constants';
+import BaseNode, { IProperties } from '../core/BaseNode';
+import { ACTION } from '../constants';
 
 /**
  * Action is the base class for all action nodes. Thus, if you want to create
@@ -10,7 +10,7 @@ import {ACTION} from '../constants';
  *       constructor(){
  *         super({name: 'Runner'});
  *       }
- *       tick(tick) {
+ *       tick(tick : Tick) {
  *         return b3.RUNNING;
  *       }
  *     };
@@ -20,23 +20,26 @@ import {ACTION} from '../constants';
  * @extends BaseNode
  **/
 
-export default class Action extends BaseNode {
-  
-  /**
-   * Creates an instance of Action.
-   * @param {Object} options 
-   * @param {String} options.name Node name. Default to `Action`.
-   * @param {String} options.title
-   * @param {Object} options.properties 
-   * @memberof Action
-   */
-  constructor({ name = 'Action', title = name, properties = {}} = {}){
-    super({
-      category: ACTION,
-      name,
-      title,
-      properties,
-    });
-  }
+export default class Action extends BaseNode
+{
+
+    /**
+     * Creates an instance of Action.
+     * @param {Object} options 
+     * @param {String} options.name Node name. Default to `Action`.
+     * @param {String} options.title
+     * @param {Object} options.properties 
+     * @memberof Action
+     */
+    constructor(name = 'Action', title = name, properties: IProperties = {})
+    {
+        super(
+            ACTION,
+            name,
+            title,
+            '',
+            properties
+        );
+    }
 
 };

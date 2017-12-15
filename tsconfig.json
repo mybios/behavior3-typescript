@@ -3,9 +3,9 @@
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "noImplicitReturns": false,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
     "experimentalDecorators": true,
     "watch": false,
     "outDir": "bin",
@@ -26,6 +26,7 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test"
   ]
 }

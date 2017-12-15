@@ -1,5 +1,7 @@
 import Decorator from '../core/Decorator';
-import {FAILURE, SUCCESS, ERROR} from '../constants';
+import { FAILURE, SUCCESS, ERROR } from '../constants';
+import Tick from '../core/Tick';
+import BaseNode from '../core/BaseNode';
 
 /**
  * The Inverter decorator inverts the result of the child, returning `SUCCESS`
@@ -10,40 +12,46 @@ import {FAILURE, SUCCESS, ERROR} from '../constants';
  * @extends Decorator
  **/
 
-export default class Inverter extends Decorator {
+export default class Inverter extends Decorator
+{
 
-  /**
-   * Creates an instance of Inverter.
-   * @param {Object} params
-   * @param {BaseNode} params.child The child node.
-   * @memberof Inverter
-   */
-  constructor({child = null} = {}){
-    super({
-      child,
-      name: 'Inverter',
-    });
-  }
-
-  /**
-   * Tick method.
-   * @method tick
-   * @param {Tick} tick A tick instance.
-   * @return {Constant} A state constant.
-   **/
-  tick(tick) {
-    if (!this.child) {
-      return ERROR;
+    /**
+     * Creates an instance of Inverter.
+     * @param {Object} params
+     * @param {BaseNode} params.child The child node.
+     * @memberof Inverter
+     */
+    constructor(child: BaseNode = null)
+    {
+        super(
+            child,
+            'Inverter'
+        );
     }
 
-    var status = this.child._execute(tick);
+    /**
+     * Tick method.
+     * @method tick
+     * @param {Tick} tick A tick instance.
+     * @return {Constant} A state constant.
+     **/
+    tick(tick: Tick)
+    {
+        if (!this.child)
+        {
+            return ERROR;
+        }
 
-    if (status == SUCCESS) {
-      status = FAILURE;
-    } else if (status == FAILURE) {
-      status = SUCCESS;
+        var status = this.child._execute(tick);
+
+        if (status == SUCCESS)
+        {
+            status = FAILURE;
+        } else if (status == FAILURE)
+        {
+            status = SUCCESS;
+        }
+
+        return status;
     }
-
-    return status;
-  }
 };

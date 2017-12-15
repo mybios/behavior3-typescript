@@ -1,5 +1,5 @@
-import BaseNode from './BaseNode';
-import {CONDITION} from '../constants';
+import BaseNode, { IProperties } from './BaseNode';
+import { CONDITION } from '../constants';
 
 /**
  * Condition is the base class for all condition nodes. Thus, if you want to
@@ -9,23 +9,26 @@ import {CONDITION} from '../constants';
  * @extends BaseNode
  **/
 
-export default class Condition extends BaseNode {
+export default class Condition extends BaseNode
+{
 
-  /**
-   * Creates an instance of Condition.
-   * @param {Object} options 
-   * @param {Object} options.name Node name. Default to `Condition`.
-   * @param {String} options.title
-   * @param {Object} options.properties
-   * @memberof Condition
-   */
-  constructor({ name = 'Condition', title = name, properties = {}} = {}) {
-    super({
-      category: CONDITION,
-      name,
-      title,
-      properties,
-    });
-  }
+    /**
+     * Creates an instance of Condition.
+     * @param {Object} options 
+     * @param {Object} options.name Node name. Default to `Condition`.
+     * @param {String} options.title
+     * @param {Object} options.properties
+     * @memberof Condition
+     */
+    constructor(name = 'Condition', title = name, properties: IProperties = {})
+    {
+        super(
+            CONDITION,
+            name,
+            title,
+            '',
+            properties
+        );
+    }
 
 };

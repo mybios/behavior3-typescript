@@ -1,5 +1,6 @@
 import Action from '../core/Action';
-import {RUNNING} from '../constants';
+import { RUNNING } from '../constants';
+import Tick from '../core/Tick';
 
 /**
  * This action node returns RUNNING always.
@@ -8,23 +9,26 @@ import {RUNNING} from '../constants';
  * @class Runner
  * @extends Action
  **/
-export default class Runner extends Action {
+export default class Runner extends Action
+{
 
-  /**
-   * Creates an instance of Runner.
-   * @memberof Runner
-   */
-  constructor(){
-    super({name: 'Runner'});
-  }
-  
-  /**
-   * Tick method.
-   * @method tick
-   * @param {b3.Tick} tick A tick instance.
-   * @return {Constant} Always return `RUNNING`.
-   **/
-  tick(tick) {
-    return RUNNING;
-  }
+    /**
+     * Creates an instance of Runner.
+     * @memberof Runner
+     */
+    constructor()
+    {
+        super('Runner');
+    }
+
+    /**
+     * Tick method.
+     * @method tick
+     * @param {b3.Tick} tick A tick instance.
+     * @return {Constant} Always return `RUNNING`.
+     **/
+    tick(tick: Tick)
+    {
+        return RUNNING;
+    }
 };

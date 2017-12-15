@@ -1,5 +1,6 @@
 import BehaviorTree from "./BehaviorTree";
 import Blackboard from "./Blackboard";
+import { BaseNode } from "../index";
 
 /**
  * A new Tick object is instantiated every tick by BehaviorTree. It is passed
@@ -19,36 +20,37 @@ import Blackboard from "./Blackboard";
  * @class Tick
  **/
 
-export default class Tick {
+export default class Tick
+{
 
-  
+
     /**
      * The tree reference.
      * @property {b3.BehaviorTree} tree
      * @readOnly
      **/
-    tree : BehaviorTree = null;
+    tree: BehaviorTree = null;
 
     /**
      * The debug reference.
      * @property {Object} debug
      * @readOnly
      */
-    debug : Object = null;
+    debug: Object = null;
 
     /**
      * The target object reference.
      * @property {Object} target
      * @readOnly
      **/
-    target : Object = null;
+    target: Object = null;
 
     /**
      * The blackboard reference.
      * @property {b3.Blackboard} blackboard
      * @readOnly
      **/
-    blackboard : Blackboard = null;
+    blackboard: Blackboard = null;
 
     // updated during the tick signal
 
@@ -58,7 +60,7 @@ export default class Tick {
      * @protected
      * @readOnly
      **/
-    _openNodes = [];
+    _openNodes: BaseNode[] = [];
 
     /**
      * The number of nodes entered during the tick. Update during the tree
@@ -69,67 +71,73 @@ export default class Tick {
      * @readOnly
      **/
     _nodeCount = 0;
-  /**
-   * Initialization method.
-   * @method initialize
-   * @constructor
-   **/
-  constructor() {
-    // set by BehaviorTree
+    /**
+     * Initialization method.
+     * @method initialize
+     * @constructor
+     **/
+    constructor()
+    {
+        // set by BehaviorTree
 
-  }
+    }
 
-  /**
-   * Called when entering a node (called by BaseNode).
-   * @method _enterNode
-   * @param {Object} node The node that called this method.
-   * @protected
-   **/
-  _enterNode(node) {
-    this._nodeCount++;
-    this._openNodes.push(node);
+    /**
+     * Called when entering a node (called by BaseNode).
+     * @method _enterNode
+     * @param {Object} node The node that called this method.
+     * @protected
+     **/
+    _enterNode(node: BaseNode)
+    {
+        this._nodeCount++;
+        this._openNodes.push(node);
 
-    // TODO: call debug here
-  }
+        // TODO: call debug here
+    }
 
-  /**
-   * Callback when opening a node (called by BaseNode).
-   * @method _openNode
-   * @param {Object} node The node that called this method.
-   * @protected
-   **/
-  _openNode(node) {
-    // TODO: call debug here
-  }
+    /**
+     * Callback when opening a node (called by BaseNode).
+     * @method _openNode
+     * @param {Object} node The node that called this method.
+     * @protected
+     **/
+    _openNode(node: BaseNode)
+    {
+        // TODO: call debug here
+    }
 
-  /**
-   * Callback when ticking a node (called by BaseNode).
-   * @method _tickNode
-   * @param {Object} node The node that called this method.
-   * @protected
-   **/
-  _tickNode(node) {
-    // TODO: call debug here
-  }
+    /**
+     * Callback when ticking a node (called by BaseNode).
+     * @method _tickNode
+     * @param {Object} node The node that called this method.
+     * @protected
+     **/
+    _tickNode(node: BaseNode)
+    {
+        // TODO: call debug here
+    }
 
-  /**
-   * Callback when closing a node (called by BaseNode).
-   * @method _closeNode
-   * @param {Object} node The node that called this method.
-   * @protected
-   **/
-  _closeNode(node) {
-    // TODO: call debug here
-    this._openNodes.pop();
-  }
+    /**
+     * Callback when closing a node (called by BaseNode).
+     * @method _closeNode
+     * @param {Object} node The node that called this method.
+     * @protected
+     **/
+    _closeNode(node: BaseNode)
+    {
+        // TODO: call debug here
+        this._openNodes.pop();
+    }
 
-  /**
-   * Callback when exiting a node (called by BaseNode).
-   * @method _exitNode
-   * @param {Object} node The node that called this method.
-   * @protected
-   **/
-  _exitNode(node) {
-    // TODO: call debug here
-  }
+    /**
+     * Callback when exiting a node (called by BaseNode).
+     * @method _exitNode
+     * @param {Object} node The node that called this method.
+     * @protected
+     **/
+    _exitNode(node: BaseNode)
+    {
+        // TODO: call debug here
+    }
 };

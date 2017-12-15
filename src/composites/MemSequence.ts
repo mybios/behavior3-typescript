@@ -1,5 +1,7 @@
 import Composite from '../core/Composite';
-import {SUCCESS, RUNNING} from '../constants';
+import { SUCCESS, RUNNING } from '../constants';
+import BaseNode from '../core/BaseNode';
+import Tick from '../core/Tick';
 
 /**
  * MemSequence is similar to Sequence node, but when a child returns a
@@ -12,49 +14,56 @@ import {SUCCESS, RUNNING} from '../constants';
  * @extends Composite
  **/
 
-export default class MemSequence extends Composite {
+export default class MemSequence extends Composite
+{
 
-  /**
-   * Creates an instance of MemSequence.
-   * @param {Object} params 
-   * @param {Array} params.children 
-   * @memberof MemSequence
-   */
-  constructor({children = []} = {}){
-    super({
-      name: 'MemSequence',
-      children
-    });
-  }
-
-  /**
-   * Open method.
-   * @method open
-   * @param {b3.Tick} tick A tick instance.
-   **/
-  open(tick) {
-    tick.blackboard.set('runningChild', 0, tick.tree.id, this.id);
-  }
-
-  /**
-   * Tick method.
-   * @method tick
-   * @param {b3.Tick} tick A tick instance.
-   * @return {Constant} A state constant.
-   **/
-  tick(tick) {
-    var child = tick.blackboard.get('runningChild', tick.tree.id, this.id);
-    for (var i=child; i<this.children.length; i++) {
-      var status = this.children[i]._execute(tick);
-
-      if (status !== SUCCESS) {
-        if (status === RUNNING) {
-          tick.blackboard.set('runningChild', i, tick.tree.id, this.id);
-        }
-        return status;
-      }
+    /**
+     * Creates an instance of MemSequence.
+     * @param {Object} params 
+     * @param {Array} params.children 
+     * @memberof MemSequence
+     */
+    constructor(children = new Array<BaseNode>())
+    {
+        super(
+            children,
+            'MemSequence'
+        );
     }
 
-    return SUCCESS;
-  }
+    /**
+     * Open method.
+     * @method open
+     * @param {b3.Tick} tick A tick instance.
+     **/
+    open(tick: Tick)
+    {
+        tick.blackboard.set('runningChild', 0, tick.tree.id, this.id);
+    }
+
+    /**
+     * Tick method.
+     * @method tick
+     * @param {b3.Tick} tick A tick instance.
+     * @return {Constant} A state constant.
+     **/
+    tick(tick: Tick)
+    {
+        var child = tick.blackboard.get('runningChild', tick.tree.id, this.id);
+        for (var i = child; i < this.children.length; i++)
+        {
+            var status = this.children[i]._execute(tick);
+
+            if (status !== SUCCESS)
+            {
+                if (status === RUNNING)
+                {
+                    tick.blackboard.set('runningChild', i, tick.tree.id, this.id);
+                }
+                return status;
+            }
+        }
+
+        return SUCCESS;
+    }
 };

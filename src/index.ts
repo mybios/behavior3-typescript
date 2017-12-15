@@ -1,5 +1,5 @@
-import {VERSION, SUCCESS, FAILURE, RUNNING, ERROR, COMPOSITE, DECORATOR, ACTION, CONDITION} from './constants';
-import {createUUID} from './b3.functions';
+import { VERSION, SUCCESS, FAILURE, RUNNING, ERROR, COMPOSITE, DECORATOR, ACTION, CONDITION } from './constants';
+import { createUUID } from './b3.functions';
 
 import Error from './actions/Error';
 import Failer from './actions/Failer';
@@ -28,38 +28,39 @@ import RepeatUntilFailure from './decorators/RepeatUntilFailure';
 import RepeatUntilSuccess from './decorators/RepeatUntilSuccess';
 import Repeater from './decorators/Repeater';
 
-export {
-  VERSION,
-  SUCCESS,
-  FAILURE,
-  RUNNING,
-  ERROR,
-  COMPOSITE,
-  DECORATOR,
-  ACTION,
-  CONDITION,
-  createUUID,
-  Error,
-  Failer,
-  Runner,
-  Succeeder,
-  Wait,
-  MemPriority,
-  MemSequence,
-  Priority,
-  Sequence,
-  Action,
-  BaseNode,
-  BehaviorTree,
-  Blackboard,
-  Composite,
-  Condition,
-  Decorator,
-  Tick,
-  Inverter,
-  Limiter,
-  MaxTime,
-  RepeatUntilFailure,
-  RepeatUntilSuccess,
-  Repeater
+export
+{
+    VERSION,
+    SUCCESS,
+    FAILURE,
+    RUNNING,
+    ERROR,
+    COMPOSITE,
+    DECORATOR,
+    ACTION,
+    CONDITION,
+    createUUID,
+    Error,
+    Failer,
+    Runner,
+    Succeeder,
+    Wait,
+    MemPriority,
+    MemSequence,
+    Priority,
+    Sequence,
+    Action,
+    BaseNode,
+    BehaviorTree,
+    Blackboard,
+    Composite,
+    Condition,
+    Decorator,
+    Tick,
+    Inverter,
+    Limiter,
+    MaxTime,
+    RepeatUntilFailure,
+    RepeatUntilSuccess,
+    Repeater
 };
