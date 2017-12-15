@@ -30,7 +30,7 @@ export default class Action extends BaseNode {
    * @param {Object} options.properties 
    * @memberof Action
    */
-  constructor({name = 'Action', title, properties} = {}){
+  constructor({ name = 'Action', title = name, properties = {}} = {}){
     super({
       category: ACTION,
       name,

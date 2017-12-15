@@ -52,7 +52,7 @@ export default class Composite extends BaseNode {
    * @param {Object} options.properties 
    * @memberof Composite
    */
-  constructor({children = [], name = 'Composite', title, properties} = {}) {
+  constructor({ children = [], name = 'Composite', title = name, properties = {}} = {}) {
     super({
       category: COMPOSITE,
       name,

@@ -14,6 +14,7 @@ import {FAILURE, ERROR} from '../constants';
 
 export default class MaxTime extends Decorator {
 
+  maxTime: number;
   /**
    * Creates an instance of MaxTime.
    * 
@@ -25,7 +26,7 @@ export default class MaxTime extends Decorator {
    * @param {BaseNode} params.child The child node.
    * @memberof MaxTime
    */
-  constructor({maxTime, child = null} = {}) {
+  constructor({maxTime, child = null} = {maxTime : 0}) {
     super({
       child,
       name: 'MaxTime',

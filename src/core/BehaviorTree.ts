@@ -4,6 +4,7 @@ import * as Decorators from '../decorators';
 import * as Composites from '../composites';
 import * as Actions from '../actions';
 import Tick from './Tick';
+import BaseNode from './BaseNode';
 
 /**
  * The BehaviorTree class, as the name implies, represents the Behavior Tree
@@ -69,32 +70,26 @@ import Tick from './Tick';
 
 export default class BehaviorTree {
 
-  /**
-   * Initialization method.
-   * @method initialize
-   * @constructor
-   **/
-  constructor() {
     /**
      * The tree id, must be unique. By default, created with `createUUID`.
      * @property {String} id
      * @readOnly
      **/
-    this.id = createUUID();
+    id = createUUID();
 
     /**
      * The tree title.
      * @property {String} title
      * @readonly
      **/
-    this.title = 'The behavior tree';
+    title = 'The behavior tree';
 
     /**
      * Description of the tree.
      * @property {String} description
      * @readonly
      **/
-    this.description = 'Default description';
+    description = 'Default description';
 
     /**
      * A dictionary with (key-value) properties. Useful to define custom
@@ -103,19 +98,25 @@ export default class BehaviorTree {
      * @property {Object} properties
      * @readonly
      **/
-    this.properties = {};
+    properties = {};
 
     /**
      * The reference to the root node. Must be an instance of `BaseNode`.
      * @property {BaseNode} root
      **/
-    this.root = null;
+    root : BaseNode = null;
 
     /**
      * The reference to the debug instance.
      * @property {Object} debug
      **/
-    this.debug = null;
+    debug = null;
+  /**
+   * Initialization method.
+   * @method initialize
+   * @constructor
+   **/
+  constructor() {
   }
 
   /**
@@ -213,7 +214,7 @@ export default class BehaviorTree {
    * @return {Object} A data object representing this tree.
    **/
   dump() {
-    var data = {};
+    var data: {[key:string]:any} = {};
     var customNames = [];
 
     data.title = this.title;
@@ -229,7 +230,7 @@ export default class BehaviorTree {
     while (stack.length > 0) {
       var node = stack.pop();
 
-      var spec = {};
+      var spec: {[key:string]:any} = {};
       spec.id = node.id;
       spec.name = node.name;
       spec.title = node.title;
@@ -241,7 +242,7 @@ export default class BehaviorTree {
       var proto = (node.constructor && node.constructor.prototype);
       var nodeName = (proto && proto.name) || node.name;
       if (!Decorators[nodeName] && !Composites[nodeName] && !Actions[nodeName] && customNames.indexOf(nodeName) < 0) {
-        var subdata = {};
+        var subdata: {[key:string]:any} = {};
         subdata.name = nodeName;
         subdata.title = (proto && proto.title) || node.title;
         subdata.category = node.category;

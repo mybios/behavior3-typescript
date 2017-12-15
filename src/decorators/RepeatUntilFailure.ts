@@ -13,6 +13,7 @@ import {SUCCESS, ERROR} from '../constants';
 
 export default class RepeatUntilFailure extends Decorator {
 
+  maxLoop: number;
   /**
    * Creates an instance of RepeatUntilFailure.
    *

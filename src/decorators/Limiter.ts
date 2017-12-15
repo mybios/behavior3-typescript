@@ -13,6 +13,7 @@ import {FAILURE, SUCCESS, ERROR} from '../constants';
 
 export default class Limiter extends Decorator {
 
+  maxLoop: number;
   /**
    * Creates an instance of Limiter.
    * 
@@ -26,7 +27,7 @@ export default class Limiter extends Decorator {
    * @param {BaseNode} params.child The child node.
    * @memberof Limiter
    */
-  constructor({child = null, maxLoop} = {}) {
+  constructor({child = null, maxLoop} = {maxLoop : 0}) {
     super({
       child,
       name: 'Limiter',

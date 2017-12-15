@@ -51,7 +51,7 @@ export default class Decorator extends BaseNode {
    * @param {Object} options.properties 
    * @memberof Decorator
    */
-  constructor({child = null, name = 'Decorator', title, properties} = {}) {
+  constructor({ child = null, name = 'Decorator', title = name, properties = {}} = {}) {
     super({
       category: DECORATOR,
       name,

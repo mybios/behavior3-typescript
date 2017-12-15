@@ -13,6 +13,7 @@ import {SUCCESS, ERROR, FAILURE} from '../constants';
 
 export default class Repeater extends Decorator {
 
+  maxLoop: number;
   /**
    * Creates an instance of MaxTime.
    *

@@ -19,7 +19,7 @@ export default class Condition extends BaseNode {
    * @param {Object} options.properties
    * @memberof Condition
    */
-  constructor({name = 'Condition', title, properties} = {}) {
+  constructor({ name = 'Condition', title = name, properties = {}} = {}) {
     super({
       category: CONDITION,
       name,

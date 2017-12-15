@@ -39,14 +39,14 @@
 
 export default class Blackboard {
 
+  _baseMemory = {};
+  _treeMemory = {};
   /**
    * Initialization method.
    * @method initialize
    * @constructor
    **/
   constructor() {
-    this._baseMemory = {};
-    this._treeMemory = {};
   }
 
   /**

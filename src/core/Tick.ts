@@ -1,3 +1,6 @@
+import BehaviorTree from "./BehaviorTree";
+import Blackboard from "./Blackboard";
+
 /**
  * A new Tick object is instantiated every tick by BehaviorTree. It is passed
  * as parameter to the nodes through the tree during the traversal.
@@ -18,41 +21,34 @@
 
 export default class Tick {
 
-  /**
-   * Initialization method.
-   * @method initialize
-   * @constructor
-   **/
-  constructor() {
-    // set by BehaviorTree
-
+  
     /**
      * The tree reference.
      * @property {b3.BehaviorTree} tree
      * @readOnly
      **/
-    this.tree = null;
+    tree : BehaviorTree = null;
 
     /**
      * The debug reference.
      * @property {Object} debug
      * @readOnly
      */
-    this.debug = null;
+    debug : Object = null;
 
     /**
      * The target object reference.
      * @property {Object} target
      * @readOnly
      **/
-    this.target = null;
+    target : Object = null;
 
     /**
      * The blackboard reference.
      * @property {b3.Blackboard} blackboard
      * @readOnly
      **/
-    this.blackboard = null;
+    blackboard : Blackboard = null;
 
     // updated during the tick signal
 
@@ -62,7 +58,7 @@ export default class Tick {
      * @protected
      * @readOnly
      **/
-    this._openNodes = [];
+    _openNodes = [];
 
     /**
      * The number of nodes entered during the tick. Update during the tree
@@ -72,7 +68,15 @@ export default class Tick {
      * @protected
      * @readOnly
      **/
-    this._nodeCount = 0;
+    _nodeCount = 0;
+  /**
+   * Initialization method.
+   * @method initialize
+   * @constructor
+   **/
+  constructor() {
+    // set by BehaviorTree
+
   }
 
   /**

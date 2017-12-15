@@ -1,5 +1,7 @@
-import {createUUID} from '../b3.functions';
-import {RUNNING} from '../constants';
+import { createUUID } from '../b3.functions';
+import { RUNNING, Category, STATE } from '../constants';
+
+
 
 /**
  * The BaseNode class is used as super class to all nodes in BehaviorJS. It
@@ -23,17 +25,38 @@ import {RUNNING} from '../constants';
  * @class BaseNode
  **/
 
-export default class BaseNode {
+export default class BaseNode
+{
 
+  id = createUUID();
+  category: Category;
+  name: string;
+  title: string;
+  description: string;
+  properties: { [key: string]: any };
+  children: Array<BaseNode>;
+  child: BaseNode;
+
+  /**
+   * A dictionary (key, value) describing the node parameters. Useful for
+   * defining parameter values in the visual editor. Note: this is only
+   * useful for nodes when loading trees from JSON files.
+   *
+   * **Deprecated since 0.2.0. This is too similar to the properties
+   * attribute, thus, this attribute is deprecated in favor to
+   * `properties`.**
+   *
+   * @property {Object} parameters
+   * @deprecated since 0.2.0.
+   * @readonly
+   **/
+  parameters = {};
   /**
    * Initialization method.
    * @method initialize
    * @constructor
    **/
-  constructor({category, name, title, description, properties} = {}) {
-
-    this.id = createUUID();
-
+  constructor({
     /**
      * Node category. Must be `COMPOSITE`, `DECORATOR`, `ACTION` or
      * `CONDITION`. This is defined automatically be inheriting the
@@ -41,7 +64,7 @@ export default class BaseNode {
      * 
      * @member BaseNode#category
      **/
-    this.category = category || '';
+    category = Category.NONE,
 
     /**
      * Node name. Must be a unique identifier,
@@ -50,7 +73,7 @@ export default class BaseNode {
      * 
      * @member BaseNode#name
      **/
-    this.name = name || '';
+    name = '',
 
     /**
      * Node title.
@@ -58,14 +81,14 @@ export default class BaseNode {
      * @optional
      * @member BaseNode#title
      **/
-    this.title = title || this.name;
+    title = name,
 
     /**
      * Node description.
      * 
      * @member BaseNode#description
      */
-    this.description = description || '';
+    description = '',
 
     /**
      * A dictionary (key, value) describing the node properties. Useful for
@@ -75,22 +98,13 @@ export default class BaseNode {
      * @type {Object}
      * @readonly
      **/
-    this.properties = properties || {};
-
-    /**
-     * A dictionary (key, value) describing the node parameters. Useful for
-     * defining parameter values in the visual editor. Note: this is only
-     * useful for nodes when loading trees from JSON files.
-     *
-     * **Deprecated since 0.2.0. This is too similar to the properties
-     * attribute, thus, this attribute is deprecated in favor to
-     * `properties`.**
-     *
-     * @property {Object} parameters
-     * @deprecated since 0.2.0.
-     * @readonly
-     **/
-    this.parameters = {};
+    properties = {} } = {})
+  {
+    this.category = category;
+    this.name = name;
+    this.title = title;
+    this.description = description;
+    this.properties = properties;
   }
 
   /**
@@ -105,12 +119,14 @@ export default class BaseNode {
    * @return {Constant} The tick state.
    * @protected
    **/
-  _execute(tick) {
+  _execute(tick)
+  {
     // ENTER
     this._enter(tick);
 
     // OPEN
-    if (!tick.blackboard.get('isOpen', tick.tree.id, this.id)) {
+    if (!tick.blackboard.get('isOpen', tick.tree.id, this.id))
+    {
       this._open(tick);
     }
 
@@ -118,7 +134,8 @@ export default class BaseNode {
     var status = this._tick(tick);
 
     // CLOSE
-    if (status !== RUNNING) {
+    if (status !== RUNNING)
+    {
       this._close(tick);
     }
 
@@ -134,7 +151,8 @@ export default class BaseNode {
    * @param {Tick} tick A tick instance.
    * @protected
    **/
-  _enter(tick) {
+  _enter(tick)
+  {
     tick._enterNode(this);
     this.enter(tick);
   }
@@ -145,7 +163,8 @@ export default class BaseNode {
    * @param {Tick} tick A tick instance.
    * @protected
    **/
-  _open(tick) {
+  _open(tick)
+  {
     tick._openNode(this);
     tick.blackboard.set('isOpen', true, tick.tree.id, this.id);
     this.open(tick);
@@ -158,7 +177,8 @@ export default class BaseNode {
    * @return {Constant} A state constant.
    * @protected
    **/
-  _tick(tick) {
+  _tick(tick)
+  {
     tick._tickNode(this);
     return this.tick(tick);
   }
@@ -169,7 +189,8 @@ export default class BaseNode {
    * @param {Tick} tick A tick instance.
    * @protected
    **/
-  _close(tick) {
+  _close(tick)
+  {
     tick._closeNode(this);
     tick.blackboard.set('isOpen', false, tick.tree.id, this.id);
     this.close(tick);
@@ -181,7 +202,8 @@ export default class BaseNode {
    * @param {Tick} tick A tick instance.
    * @protected
    **/
-  _exit(tick) {
+  _exit(tick)
+  {
     tick._exitNode(this);
     this.exit(tick);
   }
@@ -193,7 +215,7 @@ export default class BaseNode {
    * @method enter
    * @param {Tick} tick A tick instance.
    **/
-  enter(tick) {}
+  enter(tick) { }
 
   /**
    * Open method, override this to use. It is called only before the tick
@@ -204,7 +226,7 @@ export default class BaseNode {
    * @method open
    * @param {Tick} tick A tick instance.
    **/
-  open(tick) {}
+  open(tick) { }
 
   /**
    * Tick method, override this to use. This method must contain the real
@@ -214,7 +236,7 @@ export default class BaseNode {
    * @method tick
    * @param {Tick} tick A tick instance.
    **/
-  tick(tick) {}
+  tick(tick): STATE { return STATE.NONE; }
 
   /**
    * Close method, override this to use. This method is called after the tick
@@ -224,7 +246,7 @@ export default class BaseNode {
    * @method close
    * @param {Tick} tick A tick instance.
    **/
-  close(tick) {}
+  close(tick) { }
 
   /**
    * Exit method, override this to use. Called every time in the end of the
@@ -233,5 +255,5 @@ export default class BaseNode {
    * @method exit
    * @param {Tick} tick A tick instance.
    **/
-  exit(tick) {}
+  exit(tick) { }
 };

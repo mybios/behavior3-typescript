@@ -11,6 +11,7 @@ import {SUCCESS, RUNNING} from '../constants';
 
 export default class Wait extends Action {
 
+  endTime: number;
   /**
    * Creates an instance of Wait.
    * @param {Object} settings Object with parameters
