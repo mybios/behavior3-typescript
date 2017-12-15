@@ -1,8 +1,8 @@
 import { createUUID } from '../b3.functions';
 import { COMPOSITE, DECORATOR } from '../constants';
-import * as Decorators from '../decorators';
-import * as Composites from '../composites';
-import * as Actions from '../actions';
+import * as Decorators from '../decorators/index';
+import * as Composites from '../composites/index';
+import * as Actions from '../actions/index';
 import Tick from './Tick';
 import BaseNode from './BaseNode';
 import Blackboard from './Blackboard';

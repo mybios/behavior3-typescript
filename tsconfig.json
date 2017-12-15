@@ -9,20 +9,15 @@
     "experimentalDecorators": true,
     "watch": false,
     "outDir": "bin",
-    
-    // types option has been previously configured
     "types": [
-      // add node as an option
       "mocha"
-      ],
-      // typeRoots option has been previously configured
-      "typeRoots": [
-      // add path to @types
+    ],
+    "typeRoots": [
       "node_modules/@types"
-      ],
+    ],
     "lib": [
-        "es5",
-        "es2015"
+      "es5",
+      "es2015"
     ]
   },
   "exclude": [
