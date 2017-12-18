@@ -1,6 +1,6 @@
 import BehaviorTree from "./BehaviorTree";
 import Blackboard from "./Blackboard";
-import { BaseNode } from "../index";
+import BaseNode from "./BaseNode";
 
 /**
  * A new Tick object is instantiated every tick by BehaviorTree. It is passed

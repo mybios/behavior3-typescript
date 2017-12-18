@@ -30,7 +30,7 @@ export default class Limiter extends Decorator
      * @param {BaseNode} params.child The child node.
      * @memberof Limiter
      */
-    constructor(child: BaseNode = null, maxLoop = 0)
+    constructor(child: BaseNode = null, maxLoop = 1)
     {
         super(
             child,

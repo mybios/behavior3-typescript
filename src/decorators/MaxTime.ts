@@ -29,13 +29,13 @@ export default class MaxTime extends Decorator
      * @param {BaseNode} params.child The child node.
      * @memberof MaxTime
      */
-    constructor(maxTime = 0, child: BaseNode = null)
+    constructor(maxTime = 1, child: BaseNode = null)
     {
         super(
             child,
             'MaxTime',
             'Max <maxTime>ms',
-            { maxTime: 0 },
+            { maxTime: maxTime },
         );
 
         if (!maxTime)

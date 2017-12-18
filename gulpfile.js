@@ -9,7 +9,7 @@ gulp.task("default", function () {
     return browserify({
         basedir: '.',
         debug: true,
-      cache: {},
+        cache: {},
         entries : ['./src/index.ts'],
       packageCache: {},
       standalone: 'b3'
