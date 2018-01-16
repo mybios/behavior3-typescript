@@ -8,7 +8,7 @@
     "noImplicitReturns": true,
     "experimentalDecorators": true,
     "watch": false,
-    "outDir": "bin",
+    "outDir": "dist",
     "types": [
       "mocha"
     ],

@@ -1,8 +1,9 @@
 {
-  "name": "behavior3js",
+  "name": "behavior3ts",
   "version": "0.2.2",
   "description": "Behavior3 client library for Javascript (Behavior Trees for Javascript)",
-  "main": "libs/behavior3-0.2.2.js",
+  "main": "dist/index",
+  "types": "src/index",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -30,6 +31,7 @@
   "homepage": "https://behavior3.com",
   "scripts": {
     "prepublish": "gulp build",
+    "build": "tsc",
     "test": "mocha --ui tdd --compilers js:babel-register --recursive"
   },
   "devDependencies": {

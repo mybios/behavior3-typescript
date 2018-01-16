@@ -36,5 +36,5 @@ docs/behavior3*
 todo
 
 # ignore compiled files
-libs/
+dist/
 docs/*.zip
