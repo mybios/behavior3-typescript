@@ -1,6 +1,6 @@
 {
   "name": "behavior3ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Behavior3 client library for TypeScript (Behavior Trees for TypeScript)",
   "main": "dist/index",
   "types": "src/index",
