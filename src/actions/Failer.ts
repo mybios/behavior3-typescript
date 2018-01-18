@@ -9,15 +9,13 @@ import Tick from '../core/Tick';
  * @class Failer
  * @extends Action
  **/
-export default class Failer extends Action
-{
+export default class Failer extends Action {
 
     /**
      * Creates an instance of Failer.
      * @memberof Failer
      */
-    constructor()
-    {
+    constructor() {
         super('Failer');
     }
 
@@ -27,8 +25,7 @@ export default class Failer extends Action
      * @param {b3.Tick} tick A tick instance.
      * @return {Constant} Always return `FAILURE`.
      **/
-    tick(tick: Tick)
-    {
+    tick(tick: Tick) {
         return FAILURE;
     }
-};
+}

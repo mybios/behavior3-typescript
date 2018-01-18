@@ -5,15 +5,15 @@ import Tick from '../../src/core/Tick';
 
 suite('Core: Tick', function() {
     test('Initialization', function() {
-        var tick = new Tick();
+        let tick = new Tick();
 
         assert.equal(tick._nodeCount, 0);
         assert.equal(tick._openNodes.length, 0);
     });
 
     test('Updating tick info on enter', function() {
-        var tick = new Tick();
-        var node = {'id': 'node1'}
+        let tick = new Tick();
+        let node = {'id': 'node1'};
 
         tick._enterNode(node);
         assert.equal(tick._nodeCount, 1);
@@ -22,8 +22,8 @@ suite('Core: Tick', function() {
     });
 
     test('Updating tick info on close', function() {
-        var tick = new Tick();
-        var node = {'id': 'node1'}
+        let tick = new Tick();
+        let node = {'id': 'node1'};
 
         tick._nodeCount = 1;
         tick._openNodes = [node];

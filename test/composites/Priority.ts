@@ -4,30 +4,30 @@ import Priority from '../../src/composites/Priority';
 import {FAILURE, SUCCESS, RUNNING} from '../../src/constants';
 
 suite('Composite: Priority', function() {
-    var getNode = function(status) {
-        var _execute = stub();
+    let getNode = function(status) {
+        let _execute = stub();
         _execute.returns(status);
 
         return {'_execute': _execute};
-    }
+    };
 
-    var getTick = function() {
+    let getTick = function() {
         return {
             'tickNode': spy()
         };
-    }
+    };
 
     test('Name', function() {
         assert.equal(new Priority().name, 'Priority');
     });
 
     test('Success', function() {
-        var node1 = getNode(FAILURE);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(SUCCESS);
+        let node1 = getNode(FAILURE);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(SUCCESS);
 
-        var sequence = new Priority({children:[node1, node2, node3]});
-        var status = sequence.tick(getTick());
+        let sequence = new Priority({children: [node1, node2, node3]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, SUCCESS);
         assert.isTrue(node1._execute.calledOnce);
@@ -36,12 +36,12 @@ suite('Composite: Priority', function() {
     });
 
     test('Failure', function() {
-        var node1 = getNode(FAILURE);
-        var node2 = getNode(FAILURE);
-        var node3 = getNode(FAILURE);
+        let node1 = getNode(FAILURE);
+        let node2 = getNode(FAILURE);
+        let node3 = getNode(FAILURE);
 
-        var sequence = new Priority({children:[node1, node2, node3]});
-        var status = sequence.tick(getTick());
+        let sequence = new Priority({children: [node1, node2, node3]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, FAILURE);
         assert.isTrue(node1._execute.calledOnce);
@@ -50,13 +50,13 @@ suite('Composite: Priority', function() {
     });
 
     test('Running', function() {
-        var node1 = getNode(FAILURE);
-        var node2 = getNode(FAILURE);
-        var node3 = getNode(RUNNING);
-        var node4 = getNode(SUCCESS);
+        let node1 = getNode(FAILURE);
+        let node2 = getNode(FAILURE);
+        let node3 = getNode(RUNNING);
+        let node4 = getNode(SUCCESS);
 
-        var sequence = new Priority({children:[node1, node2, node3, node4]});
-        var status = sequence.tick(getTick());
+        let sequence = new Priority({children: [node1, node2, node3, node4]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, RUNNING);
         assert.isTrue(node1._execute.calledOnce);

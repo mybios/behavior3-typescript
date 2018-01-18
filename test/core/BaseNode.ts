@@ -6,7 +6,7 @@ import {SUCCESS, RUNNING} from '../../src/constants';
 
 suite('Core: BaseNode', function() {
     test('Initialization', function() {
-        var node = new BaseNode();
+        let node = new BaseNode();
 
         assert.isOk(node.id);
         assert.isDefined(node.name);
@@ -20,28 +20,28 @@ suite('Core: BaseNode', function() {
     });
 
     test('Open Node', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
         node.id = 'node1';
         node._execute(tick);
 
-        var method = tick.blackboard.set.withArgs('isOpen', true, 'tree1', 'node1');
+        let method = tick.blackboard.set.withArgs('isOpen', true, 'tree1', 'node1');
         assert.isTrue(method.calledOnce);
     });
 
     test('Close Node', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
         node.id = 'node1';
         node._execute(tick);
 
-        var method = tick.blackboard.set.withArgs('isOpen', false, 'tree1', 'node1');
+        let method = tick.blackboard.set.withArgs('isOpen', false, 'tree1', 'node1');
         assert.isTrue(method.calledOnce);
     });
 
     test('Execute is calling functions?', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
 
         tick.blackboard.get
             .withArgs('isOpen', 'tree1', 'node1')
@@ -64,8 +64,8 @@ suite('Core: BaseNode', function() {
     });
 
     test('Execute does not opening a node already open', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
 
         tick.blackboard.get
             .withArgs('isOpen', 'tree1', 'node1')
@@ -79,8 +79,8 @@ suite('Core: BaseNode', function() {
     });
 
     test('Execute closing the node that does not returns RUNNING', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
 
         tick.blackboard.get.returns(false);
 
@@ -94,8 +94,8 @@ suite('Core: BaseNode', function() {
     });
 
     test('Execute calling tick callbacks', function() {
-        var node = new BaseNode();
-        var tick = TickStub();
+        let node = new BaseNode();
+        let tick = TickStub();
 
         tick.blackboard.get.returns(false);
         node._execute(tick);

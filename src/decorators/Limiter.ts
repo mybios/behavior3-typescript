@@ -13,25 +13,23 @@ import BaseNode from '../core/BaseNode';
  * @extends Decorator
  **/
 
-export default class Limiter extends Decorator
-{
+export default class Limiter extends Decorator {
 
     maxLoop: number;
     /**
      * Creates an instance of Limiter.
-     * 
+     *
      * Settings parameters:
-     * 
+     *
      * - **maxLoop** (*Integer*) Maximum number of repetitions.
      * - **child** (*BaseNode*) The child node.
-     * 
+     *
      * @param {Object} params
      * @param {Number} params.maxLoop Maximum number of repetitions.
      * @param {BaseNode} params.child The child node.
      * @memberof Limiter
      */
-    constructor(child: BaseNode = null, maxLoop = 1)
-    {
+    constructor(child: BaseNode = null, maxLoop = 1) {
         super(
             child,
             'Limiter',
@@ -39,8 +37,7 @@ export default class Limiter extends Decorator
             { maxLoop: 1 },
         );
 
-        if (!maxLoop)
-        {
+        if (!maxLoop) {
             throw 'maxLoop parameter in Limiter decorator is an obligatory parameter';
         }
 
@@ -52,8 +49,7 @@ export default class Limiter extends Decorator
      * @method open
      * @param {Tick} tick A tick instance.
      **/
-    open(tick: Tick)
-    {
+    open(tick: Tick) {
         tick.blackboard.set('i', 0, tick.tree.id, this.id);
     }
 
@@ -63,18 +59,15 @@ export default class Limiter extends Decorator
      * @param {Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        if (!this.child)
-        {
+    tick(tick: Tick) {
+        if (!this.child) {
             return ERROR;
         }
 
-        var i = tick.blackboard.get('i', tick.tree.id, this.id);
+        let i = tick.blackboard.get('i', tick.tree.id, this.id);
 
-        if (i < this.maxLoop)
-        {
-            var status = this.child._execute(tick);
+        if (i < this.maxLoop) {
+            let status = this.child._execute(tick);
 
             if (status == SUCCESS || status == FAILURE)
                 tick.blackboard.set('i', i + 1, tick.tree.id, this.id);
@@ -84,4 +77,4 @@ export default class Limiter extends Decorator
 
         return FAILURE;
     }
-};
+}

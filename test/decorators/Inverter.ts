@@ -10,15 +10,15 @@ suite('Decorator: Inverter', function() {
     });
 
     test('Initialization', function() {
-        var node = new Inverter();
+        let node = new Inverter();
         assert.equal(node.name, 'Inverter');
     });
 
     test('Inverting Values', function() {
-        var tick = TickStub();
-        var child = {'_execute': stub()};
-        var node = new Inverter({child: child});
-        var status = 0;
+        let tick = TickStub();
+        let child = {'_execute': stub()};
+        let node = new Inverter({child: child});
+        let status = 0;
 
         child._execute.returns(SUCCESS);
         status = node._execute(tick);
@@ -30,10 +30,10 @@ suite('Decorator: Inverter', function() {
     });
 
     test('Running and Error', function() {
-        var tick = TickStub();
-        var child = {'_execute': stub()};
-        var node = new Inverter({child: child});
-        var status = 0;
+        let tick = TickStub();
+        let child = {'_execute': stub()};
+        let node = new Inverter({child: child});
+        let status = 0;
 
         child._execute.returns(RUNNING);
         status = node._execute(tick);

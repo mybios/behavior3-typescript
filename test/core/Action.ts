@@ -8,7 +8,7 @@ suite('Core: Action', function() {
     });
 
     test('Initialization', function() {
-        var node = new Action();
+        let node = new Action();
 
         assert.isOk(node.id);
         assert.isDefined(node.title);

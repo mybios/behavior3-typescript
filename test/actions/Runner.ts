@@ -9,9 +9,9 @@ suite('Action: Runner', function() {
     });
 
     test('Tick', function() {
-        var failer = new Runner();
+        let failer = new Runner();
 
-        var status = failer._execute(TickStub());
+        let status = failer._execute(TickStub());
         assert.equal(status, RUNNING);
     });
 });

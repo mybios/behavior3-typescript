@@ -8,7 +8,7 @@ suite('Core: Condition', function() {
     });
 
     test('Initialization', function() {
-        var node = new Condition();
+        let node = new Condition();
 
         assert.isOk(node.id);
         assert.isDefined(node.title);

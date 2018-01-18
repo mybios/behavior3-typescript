@@ -1,7 +1,7 @@
 {
   "name": "behavior3ts",
-  "version": "0.2.2",
-  "description": "Behavior3 client library for Javascript (Behavior Trees for Javascript)",
+  "version": "1.0.0",
+  "description": "Behavior3 client library for TypeScript (Behavior Trees for TypeScript)",
   "main": "dist/index",
   "types": "src/index",
   "directories": {
@@ -30,8 +30,8 @@
   },
   "homepage": "https://behavior3.com",
   "scripts": {
-    "prepublish": "gulp build",
     "build": "tsc",
+    "fix-lint": "tslint --format prose -c ./tslint.json src/**/*.ts test/**/*.ts --fix",
     "test": "mocha --ui tdd --compilers js:babel-register --recursive"
   },
   "devDependencies": {

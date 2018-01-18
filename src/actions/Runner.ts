@@ -9,15 +9,13 @@ import Tick from '../core/Tick';
  * @class Runner
  * @extends Action
  **/
-export default class Runner extends Action
-{
+export default class Runner extends Action {
 
     /**
      * Creates an instance of Runner.
      * @memberof Runner
      */
-    constructor()
-    {
+    constructor() {
         super('Runner');
     }
 
@@ -27,8 +25,7 @@ export default class Runner extends Action
      * @param {b3.Tick} tick A tick instance.
      * @return {Constant} Always return `RUNNING`.
      **/
-    tick(tick: Tick)
-    {
+    tick(tick: Tick) {
         return RUNNING;
     }
-};
+}

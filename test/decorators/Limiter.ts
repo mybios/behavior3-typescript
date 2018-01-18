@@ -6,18 +6,18 @@ import {SUCCESS, RUNNING} from '../../src/constants';
 
 suite('Decorator: Limiter', function() {
     test('Name', function() {
-        assert.equal(new Limiter({maxLoop:1}).name, 'Limiter');
+        assert.equal(new Limiter({maxLoop: 1}).name, 'Limiter');
     });
 
     test('Initialization', function() {
-        var node = new Limiter({maxLoop:3});
+        let node = new Limiter({maxLoop: 3});
         assert.equal(node.name, 'Limiter');
     });
 
     test('Open', function() {
-        var child = {'_execute': stub()};
-        var tick = TickStub();
-        var node = new Limiter({maxLoop:3, child:child});
+        let child = {'_execute': stub()};
+        let tick = TickStub();
+        let node = new Limiter({maxLoop: 3, child: child});
         node.id = 'node1';
 
         node._execute(tick);
@@ -25,9 +25,9 @@ suite('Decorator: Limiter', function() {
     });
 
     test('Test Maximum Repetition', function() {
-        var child = {'_execute': stub()};
-        var tick = TickStub();
-        var node = new Limiter({maxLoop: 10, child: child});
+        let child = {'_execute': stub()};
+        let tick = TickStub();
+        let node = new Limiter({maxLoop: 10, child: child});
 
         child._execute.returns(SUCCESS);
         node.id = 'node1';
@@ -46,9 +46,9 @@ suite('Decorator: Limiter', function() {
     });
 
     test('RUNNING doesnt count', function() {
-        var child = {'_execute': stub()};
-        var tick = TickStub();
-        var node = new Limiter({maxLoop:10,child: child});
+        let child = {'_execute': stub()};
+        let tick = TickStub();
+        let node = new Limiter({maxLoop: 10, child: child});
 
         child._execute.returns(RUNNING);
         node.id = 'node1';

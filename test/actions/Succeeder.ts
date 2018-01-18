@@ -9,9 +9,9 @@ suite('Action: Succeeder', function() {
     });
 
     test('Tick', function() {
-        var failer = new Succeeder();
+        let failer = new Succeeder();
 
-        var status = failer._execute(TickStub());
+        let status = failer._execute(TickStub());
         assert.equal(status, SUCCESS);
     });
 });

@@ -12,9 +12,9 @@ import {ACTION, CONDITION} from '../../src/constants';
 
 suite('Core: Behavior Tree - Serialization', function() {
     test('Load JSON with default nodes', function() {
-        var tree = new BehaviorTree();
+        let tree = new BehaviorTree();
 
-        var data = {
+        let data = {
             'title'       : 'A JSON Behavior Tree',
             'description' : 'This description',
             'root'        : '1',
@@ -87,21 +87,21 @@ suite('Core: Behavior Tree - Serialization', function() {
         assert.equal(tree.root.properties['composite']['var3'], 'value');
 
         // Node 1
-        var node = tree.root.children[0];
+        let node = tree.root.children[0];
         assert.instanceOf(node, Inverter);
         assert.equal(node.title, 'Node 1');
         assert.equal(node.description, 'Node 1 Description');
         assert.isDefined(node.child);
 
         // Node 2
-        var node = tree.root.children[1];
+        let node = tree.root.children[1];
         assert.instanceOf(node, MemSequence);
         assert.equal(node.title, 'Node 2');
         assert.equal(node.description, 'Node 2 Description');
         assert.equal(node.children.length, 0);
 
         // Node 3
-        var node = tree.root.children[0].child;
+        let node = tree.root.children[0].child;
         assert.instanceOf(node, MaxTime);
         assert.equal(node.title, 'Node 3');
         assert.equal(node.description, 'Node 3 Description');
@@ -109,9 +109,9 @@ suite('Core: Behavior Tree - Serialization', function() {
     });
 
     test('Load JSON model with custom nodes', function() {
-        var tree = new BehaviorTree();
+        let tree = new BehaviorTree();
 
-        var data = {
+        let data = {
             'title'       : 'A JSON Behavior Tree',
             'description' : 'This descriptions',
             'root'        : '1',
@@ -139,14 +139,14 @@ suite('Core: Behavior Tree - Serialization', function() {
         assert.equal(tree.root.children.length, 1);
 
         // Node 2
-        var node = tree.root.children[0];
+        let node = tree.root.children[0];
         assert.instanceOf(node, Condition);
         assert.equal(node.title, 'Node 2');
         assert.equal(node.description, 'Node 2 Description');
     });
 
     test('Dump JSON model', function() {
-        var tree = new BehaviorTree();
+        let tree = new BehaviorTree();
 
         tree.properties = {
             'prop': 'value',
@@ -154,41 +154,41 @@ suite('Core: Behavior Tree - Serialization', function() {
                 'val1': 234,
                 'val2': 'value'
             }
-        }
+        };
 
-        var node5 = new Condition();
+        let node5 = new Condition();
         node5.id = 'node-5';
         node5.title = 'Node5';
         node5.description = 'Node 5 Description';
 
-        var node4 = new Wait();
+        let node4 = new Wait();
         node4.id = 'node-4';
         node4.title = 'Node4';
         node4.description = 'Node 4 Description';
 
-        var node3 = new MemSequence({children:[node5]});
+        let node3 = new MemSequence({children: [node5]});
         node3.id = 'node-3';
         node3.title = 'Node3';
         node3.description = 'Node 3 Description';
 
-        var node2 = new Inverter({child:node4});
+        let node2 = new Inverter({child: node4});
         node2.id = 'node-2';
         node2.title = 'Node2';
         node2.description = 'Node 2 Description';
 
-        var node1 = new Priority({children:[node2, node3]});
+        let node1 = new Priority({children: [node2, node3]});
         node1.id = 'node-1';
         node1.title = 'Node1';
         node1.description = 'Node 1 Description';
         node1.properties = {
             'key' : 'value'
-        }
+        };
 
         tree.root = node1;
         tree.title = 'Title in Tree';
         tree.description = 'Tree Description';
 
-        var data = tree.dump();
+        let data = tree.dump();
 
         assert.equal(data['title'], 'Title in Tree');
         assert.equal(data['description'], 'Tree Description');
@@ -196,7 +196,7 @@ suite('Core: Behavior Tree - Serialization', function() {
         assert.equal(data['properties']['prop'], 'value');
         assert.equal(data['properties']['comp']['val1'], 234);
         assert.equal(data['properties']['comp']['val2'], 'value');
-        
+
         assert.isDefined(data['custom_nodes']);
         assert.equal(data['custom_nodes'].length, 1);
         assert.equal(data['custom_nodes'][0]['name'], 'Condition');

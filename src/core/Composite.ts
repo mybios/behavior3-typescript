@@ -41,20 +41,18 @@ import { COMPOSITE } from '../constants';
  * @extends BaseNode
  **/
 
-export default class Composite extends BaseNode
-{
+export default class Composite extends BaseNode {
 
     /**
      * Creates an instance of Composite.
-     * @param {Object} options 
-     * @param {BaseNode[]} options.children 
+     * @param {Object} options
+     * @param {BaseNode[]} options.children
      * @param {String} options.name Node name. Default to `Composite`.
-     * @param {String} options.title 
-     * @param {Object} options.properties 
+     * @param {String} options.title
+     * @param {Object} options.properties
      * @memberof Composite
      */
-    constructor(children: BaseNode[] = [], name = 'Composite', title = name, properties = {})
-    {
+    constructor(children: BaseNode[] = [], name = 'Composite', title = name, properties = {}) {
         super(
             COMPOSITE,
             name,
@@ -65,4 +63,4 @@ export default class Composite extends BaseNode
         this.children = (children).slice(0);
     }
 
-};
+}

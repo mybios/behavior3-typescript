@@ -27,8 +27,7 @@ export type IProperties = { [key: string]: any };
  * @class BaseNode
  **/
 
-export default class BaseNode
-{
+export default class BaseNode {
 
     id = createUUID();
 
@@ -59,7 +58,7 @@ export default class BaseNode
          * Node category. Must be `COMPOSITE`, `DECORATOR`, `ACTION` or
          * `CONDITION`. This is defined automatically be inheriting the
          * correspondent class.
-         * 
+         *
          * @member BaseNode#category
          **/
         public category = Category.NONE,
@@ -68,14 +67,14 @@ export default class BaseNode
          * Node name. Must be a unique identifier,
          * preferable the same name of the
          * class. You have to set the node name in the prototype.
-         * 
+         *
          * @member BaseNode#name
          **/
         public name = '',
 
         /**
          * Node title.
-         * 
+         *
          * @optional
          * @member BaseNode#title
          **/
@@ -83,7 +82,7 @@ export default class BaseNode
 
         /**
          * Node description.
-         * 
+         *
          * @member BaseNode#description
          */
         public description = '',
@@ -96,8 +95,7 @@ export default class BaseNode
          * @type {Object}
          * @readonly
          **/
-        public properties: IProperties = {})
-    {
+        public properties: IProperties = {}) {
     }
 
     /**
@@ -112,23 +110,20 @@ export default class BaseNode
      * @return {Constant} The tick state.
      * @protected
      **/
-    _execute(tick: Tick)
-    {
+    _execute(tick: Tick) {
         // ENTER
         this._enter(tick);
 
         // OPEN
-        if (!tick.blackboard.get('isOpen', tick.tree.id, this.id))
-        {
+        if (!tick.blackboard.get('isOpen', tick.tree.id, this.id)) {
             this._open(tick);
         }
 
         // TICK
-        var status = this._tick(tick);
+        let status = this._tick(tick);
 
         // CLOSE
-        if (status !== RUNNING)
-        {
+        if (status !== RUNNING) {
             this._close(tick);
         }
 
@@ -144,8 +139,7 @@ export default class BaseNode
      * @param {Tick} tick A tick instance.
      * @protected
      **/
-    _enter(tick: Tick)
-    {
+    _enter(tick: Tick) {
         tick._enterNode(this);
         this.enter(tick);
     }
@@ -156,8 +150,7 @@ export default class BaseNode
      * @param {Tick} tick A tick instance.
      * @protected
      **/
-    _open(tick: Tick)
-    {
+    _open(tick: Tick) {
         tick._openNode(this);
         tick.blackboard.set('isOpen', true, tick.tree.id, this.id);
         this.open(tick);
@@ -170,8 +163,7 @@ export default class BaseNode
      * @return {Constant} A state constant.
      * @protected
      **/
-    _tick(tick: Tick)
-    {
+    _tick(tick: Tick) {
         tick._tickNode(this);
         return this.tick(tick);
     }
@@ -182,8 +174,7 @@ export default class BaseNode
      * @param {Tick} tick A tick instance.
      * @protected
      **/
-    _close(tick: Tick)
-    {
+    _close(tick: Tick) {
         tick._closeNode(this);
         tick.blackboard.set('isOpen', false, tick.tree.id, this.id);
         this.close(tick);
@@ -195,8 +186,7 @@ export default class BaseNode
      * @param {Tick} tick A tick instance.
      * @protected
      **/
-    _exit(tick: Tick)
-    {
+    _exit(tick: Tick) {
         tick._exitNode(this);
         this.exit(tick);
     }
@@ -249,4 +239,4 @@ export default class BaseNode
      * @param {Tick} tick A tick instance.
      **/
     exit(tick: Tick) { }
-};
+}

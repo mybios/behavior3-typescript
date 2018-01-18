@@ -13,17 +13,15 @@ import BaseNode from '../core/BaseNode';
  * @extends Composite
  **/
 
-export default class Priority extends Composite
-{
+export default class Priority extends Composite {
 
     /**
      * Creates an instance of Priority.
-     * @param {Object} params 
-     * @param {Array} params.children 
+     * @param {Object} params
+     * @param {Array} params.children
      * @memberof Priority
      */
-    constructor(children = new Array<BaseNode>())
-    {
+    constructor(children = new Array<BaseNode>()) {
         super(
             children,
             'Priority'
@@ -36,18 +34,15 @@ export default class Priority extends Composite
      * @param {Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        for (var i = 0; i < this.children.length; i++)
-        {
-            var status = this.children[i]._execute(tick);
+    tick(tick: Tick) {
+        for (let i = 0; i < this.children.length; i++) {
+            let status = this.children[i]._execute(tick);
 
-            if (status !== FAILURE)
-            {
+            if (status !== FAILURE) {
                 return status;
             }
         }
 
         return FAILURE;
     }
-};
+}

@@ -8,7 +8,7 @@ suite('Core: Composite', function() {
     });
 
     test('Initialization', function() {
-        var node = new Composite({children:['child1', 'child2']});
+        let node = new Composite({children: ['child1', 'child2']});
 
         assert.isOk(node.id);
         assert.isDefined(node.title);

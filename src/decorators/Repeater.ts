@@ -13,8 +13,7 @@ import Tick from '../core/Tick';
  * @extends Decorator
  **/
 
-export default class Repeater extends Decorator
-{
+export default class Repeater extends Decorator {
 
     maxLoop: number;
     /**
@@ -28,8 +27,7 @@ export default class Repeater extends Decorator
      * @param {BaseNode} params.child The child node.
      * @memberof Repeater
      **/
-    constructor(maxLoop = -1, child: BaseNode = null)
-    {
+    constructor(maxLoop = -1, child: BaseNode = null) {
         super(
             child,
             'Repeater',
@@ -45,8 +43,7 @@ export default class Repeater extends Decorator
      * @method open
      * @param {Tick} tick A tick instance.
      **/
-    open(tick: Tick)
-    {
+    open(tick: Tick) {
         tick.blackboard.set('i', 0, tick.tree.id, this.id);
     }
 
@@ -55,25 +52,20 @@ export default class Repeater extends Decorator
      * @method tick
      * @param {Tick} tick A tick instance.
      **/
-    tick(tick: Tick)
-    {
-        if (!this.child)
-        {
+    tick(tick: Tick) {
+        if (!this.child) {
             return ERROR;
         }
 
-        var i = tick.blackboard.get('i', tick.tree.id, this.id);
-        var status = SUCCESS;
+        let i = tick.blackboard.get('i', tick.tree.id, this.id);
+        let status = SUCCESS;
 
-        while (this.maxLoop < 0 || i < this.maxLoop)
-        {
+        while (this.maxLoop < 0 || i < this.maxLoop) {
             status = this.child._execute(tick);
 
-            if (status == SUCCESS || status == FAILURE)
-            {
+            if (status == SUCCESS || status == FAILURE) {
                 i++;
-            } else
-            {
+            } else {
                 break;
             }
         }
@@ -81,4 +73,4 @@ export default class Repeater extends Decorator
         tick.blackboard.set('i', i, tick.tree.id, this.id);
         return status;
     }
-};
+}

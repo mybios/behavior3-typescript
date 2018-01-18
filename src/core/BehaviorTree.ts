@@ -69,8 +69,7 @@ import Blackboard from './Blackboard';
  * @class BehaviorTree
  **/
 
-export default class BehaviorTree
-{
+export default class BehaviorTree {
 
     /**
      * The tree id, must be unique. By default, created with `createUUID`.
@@ -118,8 +117,7 @@ export default class BehaviorTree
      * @method initialize
      * @constructor
      **/
-    constructor()
-    {
+    constructor() {
     }
 
     /**
@@ -150,37 +148,30 @@ export default class BehaviorTree
      * @param {Object} data The data structure representing a Behavior Tree.
      * @param {Object} [names] A namespace or dict containing custom nodes.
      **/
-    load(data: any, names: any = {})
-    {
+    load(data: any, names: any = {}) {
 
         this.title = data.title || this.title;
         this.description = data.description || this.description;
         this.properties = data.properties || this.properties;
 
-        var nodes: any = {};
-        var id, spec, node;
+        let nodes: any = {};
+        let id, spec, node;
         // Create the node list (without connection between them)
-        for (id in data.nodes)
-        {
+        for (id in data.nodes) {
             spec = data.nodes[id];
-            var Cls;
+            let Cls;
 
-            if (spec.name in names)
-            {
+            if (spec.name in names) {
                 // Look for the name in custom nodes
                 Cls = names[spec.name];
-            } else if (spec.name in Decorators)
-            {
+            } else if (spec.name in Decorators) {
                 // Look for the name in default nodes
                 Cls = (Decorators as any)[spec.name];
-            } else if (spec.name in Composites)
-            {
+            } else if (spec.name in Composites) {
                 Cls = (Composites as any)[spec.name];
-            } else if (spec.name in Actions)
-            {
+            } else if (spec.name in Actions) {
                 Cls = (Actions as any)[spec.name];
-            } else
-            {
+            } else {
                 // Invalid node name
                 throw new EvalError('BehaviorTree.load: Invalid node name + "' +
                     spec.name + '".');
@@ -196,20 +187,16 @@ export default class BehaviorTree
         }
 
         // Connect the nodes
-        for (id in data.nodes)
-        {
+        for (id in data.nodes) {
             spec = data.nodes[id];
             node = nodes[id];
 
-            if (node.category === COMPOSITE && spec.children)
-            {
-                for (var i = 0; i < spec.children.length; i++)
-                {
-                    var cid = spec.children[i];
+            if (node.category === COMPOSITE && spec.children) {
+                for (let i = 0; i < spec.children.length; i++) {
+                    let cid = spec.children[i];
                     node.children.push(nodes[cid]);
                 }
-            } else if (node.category === DECORATOR && spec.child)
-            {
+            } else if (node.category === DECORATOR && spec.child) {
                 node.child = nodes[spec.child];
             }
         }
@@ -226,10 +213,9 @@ export default class BehaviorTree
      * @method dump
      * @return {Object} A data object representing this tree.
      **/
-    dump()
-    {
-        var data: { [key: string]: any } = {};
-        var customNames = [];
+    dump() {
+        let data: { [key: string]: any } = {};
+        let customNames = [];
 
         data.title = this.title;
         data.description = this.description;
@@ -240,12 +226,11 @@ export default class BehaviorTree
 
         if (!this.root) return data;
 
-        var stack = [this.root];
-        while (stack.length > 0)
-        {
-            var node = stack.pop();
+        let stack = [this.root];
+        while (stack.length > 0) {
+            let node = stack.pop();
 
-            var spec: { [key: string]: any } = {};
+            let spec: { [key: string]: any } = {};
             spec.id = node.id;
             spec.name = node.name;
             spec.title = node.title;
@@ -254,11 +239,10 @@ export default class BehaviorTree
             spec.parameters = node.parameters;
 
             // verify custom node
-            var proto = (node.constructor && node.constructor.prototype);
-            var nodeName = (proto && proto.name) || node.name;
-            if (!(Decorators as any)[nodeName] && !(Composites as any)[nodeName] && !(Actions as any)[nodeName] && customNames.indexOf(nodeName) < 0)
-            {
-                var subdata: { [key: string]: any } = {};
+            let proto = (node.constructor && node.constructor.prototype);
+            let nodeName = (proto && proto.name) || node.name;
+            if (!(Decorators as any)[nodeName] && !(Composites as any)[nodeName] && !(Actions as any)[nodeName] && customNames.indexOf(nodeName) < 0) {
+                let subdata: { [key: string]: any } = {};
                 subdata.name = nodeName;
                 subdata.title = (proto && proto.title) || node.title;
                 subdata.category = node.category;
@@ -268,17 +252,14 @@ export default class BehaviorTree
             }
 
             // store children/child
-            if (node.category === COMPOSITE && node.children)
-            {
-                var children = [];
-                for (var i = node.children.length - 1; i >= 0; i--)
-                {
+            if (node.category === COMPOSITE && node.children) {
+                let children = [];
+                for (let i = node.children.length - 1; i >= 0; i--) {
                     children.push(node.children[i].id);
                     stack.push(node.children[i]);
                 }
                 spec.children = children;
-            } else if (node.category === DECORATOR && node.child)
-            {
+            } else if (node.category === DECORATOR && node.child) {
                 stack.push(node.child);
                 spec.child = node.child.id;
             }
@@ -311,43 +292,38 @@ export default class BehaviorTree
      * @param {Blackboard} blackboard An instance of blackboard object.
      * @return {Constant} The tick signal state.
      **/
-    tick(target: Object, blackboard: Blackboard)
-    {
-        if (!blackboard)
-        {
+    tick(target: Object, blackboard: Blackboard) {
+        if (!blackboard) {
             throw 'The blackboard parameter is obligatory and must be an ' +
             'instance of b3.Blackboard';
         }
 
         /* CREATE A TICK OBJECT */
-        var tick = new Tick();
+        let tick = new Tick();
         tick.debug = this.debug;
         tick.target = target;
         tick.blackboard = blackboard;
         tick.tree = this;
 
         /* TICK NODE */
-        var state = this.root._execute(tick);
+        let state = this.root._execute(tick);
 
         /* CLOSE NODES FROM LAST TICK, IF NEEDED */
-        var lastOpenNodes = blackboard.get('openNodes', this.id);
-        var currOpenNodes = tick._openNodes.slice(0);
+        let lastOpenNodes = blackboard.get('openNodes', this.id);
+        let currOpenNodes = tick._openNodes.slice(0);
 
         // does not close if it is still open in this tick
-        var start = 0;
-        var i;
-        for (i = 0; i < Math.min(lastOpenNodes.length, currOpenNodes.length); i++)
-        {
+        let start = 0;
+        let i;
+        for (i = 0; i < Math.min(lastOpenNodes.length, currOpenNodes.length); i++) {
             start = i + 1;
-            if (lastOpenNodes[i] !== currOpenNodes[i])
-            {
+            if (lastOpenNodes[i] !== currOpenNodes[i]) {
                 break;
             }
         }
 
         // close the nodes
-        for (i = lastOpenNodes.length - 1; i >= start; i--)
-        {
+        for (i = lastOpenNodes.length - 1; i >= start; i--) {
             lastOpenNodes[i]._close(tick);
         }
 
@@ -357,4 +333,4 @@ export default class BehaviorTree
 
         return state;
     }
-};
+}

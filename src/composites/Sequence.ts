@@ -13,17 +13,15 @@ import BaseNode from '../core/BaseNode';
  * @extends Composite
  **/
 
-export default class Sequence extends Composite
-{
+export default class Sequence extends Composite {
 
     /**
      * Creates an instance of Sequence.
-     * @param {Object} params 
-     * @param {Array} params.children 
+     * @param {Object} params
+     * @param {Array} params.children
      * @memberof Sequence
      */
-    constructor(children = new Array<BaseNode>())
-    {
+    constructor(children = new Array<BaseNode>()) {
         super(children,
             'Sequence');
     }
@@ -34,18 +32,15 @@ export default class Sequence extends Composite
      * @param {b3.Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        for (var i = 0; i < this.children.length; i++)
-        {
-            var status = this.children[i]._execute(tick);
+    tick(tick: Tick) {
+        for (let i = 0; i < this.children.length; i++) {
+            let status = this.children[i]._execute(tick);
 
-            if (status !== SUCCESS)
-            {
+            if (status !== SUCCESS) {
                 return status;
             }
         }
 
         return SUCCESS;
     }
-};
+}

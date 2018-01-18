@@ -15,10 +15,10 @@ suite('Action: Wait', function() {
     });
 
     test('Wait.open', function() {
-        var now = Date.now();
-        var wait = new Wait({milliseconds: 100});
+        let now = Date.now();
+        let wait = new Wait({milliseconds: 100});
         wait.id = 'node1';
-        var tick = TickStub();
+        let tick = TickStub();
 
         wait.open(tick);
         assert.equal(tick.blackboard.set.callCount, 1);
@@ -28,10 +28,10 @@ suite('Action: Wait', function() {
     });
 
     test('Wait.tick', function () {
-        var wait = new Wait({milliseconds: 100});
-        var now = Date.now();
+        let wait = new Wait({milliseconds: 100});
+        let now = Date.now();
         wait.id = 'node1';
-        var tick = TickStub();
+        let tick = TickStub();
 
         tick.blackboard.get.returns(now - 99);
         assert.equal(wait.tick(tick), RUNNING);

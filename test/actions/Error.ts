@@ -9,9 +9,9 @@ suite('Action: Error', function() {
     });
 
     test('Tick', function() {
-        var failer = new Error();
+        let failer = new Error();
 
-        var status = failer._execute(TickStub());
+        let status = failer._execute(TickStub());
         assert.equal(status, ERROR);
     });
 });

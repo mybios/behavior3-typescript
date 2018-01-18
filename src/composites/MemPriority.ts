@@ -14,17 +14,15 @@ import Tick from '../core/Tick';
  * @extends Composite
  **/
 
-export default class MemPriority extends Composite
-{
+export default class MemPriority extends Composite {
 
     /**
      * Creates an instance of MemPriority.
-     * @param {Object} params 
-     * @param {Array} params.children 
+     * @param {Object} params
+     * @param {Array} params.children
      * @memberof MemPriority
      */
-    constructor(children = new Array<BaseNode>())
-    {
+    constructor(children = new Array<BaseNode>()) {
         super(
             children,
             'MemPriority',
@@ -36,8 +34,7 @@ export default class MemPriority extends Composite
      * @method open
      * @param {b3.Tick} tick A tick instance.
      **/
-    open(tick: Tick)
-    {
+    open(tick: Tick) {
         tick.blackboard.set('runningChild', 0, tick.tree.id, this.id);
     }
 
@@ -47,17 +44,13 @@ export default class MemPriority extends Composite
      * @param {b3.Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        var child = tick.blackboard.get('runningChild', tick.tree.id, this.id);
-        for (var i = child; i < this.children.length; i++)
-        {
-            var status = this.children[i]._execute(tick);
+    tick(tick: Tick) {
+        let child = tick.blackboard.get('runningChild', tick.tree.id, this.id);
+        for (let i = child; i < this.children.length; i++) {
+            let status = this.children[i]._execute(tick);
 
-            if (status !== FAILURE)
-            {
-                if (status === RUNNING)
-                {
+            if (status !== FAILURE) {
+                if (status === RUNNING) {
                     tick.blackboard.set('runningChild', i, tick.tree.id, this.id);
                 }
 
@@ -67,4 +60,4 @@ export default class MemPriority extends Composite
 
         return FAILURE;
     }
-};
+}

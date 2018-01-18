@@ -4,7 +4,7 @@ import Blackboard from '../../src/core/Blackboard';
 /* BLACKBOARD ============================================================== */
 suite('Core: Blackboard', function() {
     test('Basic Read & Write operations', function() {
-        var blackboard = new Blackboard();
+        let blackboard = new Blackboard();
 
         blackboard.set('var1', 'this is some value');
         blackboard.set('var2', 999888);
@@ -15,7 +15,7 @@ suite('Core: Blackboard', function() {
     });
 
     test('Tree memory initialization', function() {
-        var blackboard = new Blackboard();
+        let blackboard = new Blackboard();
 
         blackboard.set('var1', 'value', 'tree1');
 
@@ -26,7 +26,7 @@ suite('Core: Blackboard', function() {
     });
 
     test('Read & Write operations within Tree Scope', function() {
-        var blackboard = new Blackboard();
+        let blackboard = new Blackboard();
 
         blackboard.set('var1', 'this is some value', 'tree 1');
         blackboard.set('var2', 999888, 'tree 2');
@@ -39,7 +39,7 @@ suite('Core: Blackboard', function() {
     });
 
     test('Read & Write operations within Tree and Node Scopes', function() {
-        var blackboard = new Blackboard();
+        let blackboard = new Blackboard();
 
         blackboard.set('var1', 'value 1', 'tree 1');
         blackboard.set('var2', 'value 2', 'tree 1', 'node 1');

@@ -5,39 +5,39 @@ import MemSequence from '../../src/composites/MemSequence';
 import {RUNNING, SUCCESS, FAILURE} from '../../src/constants';
 
 suite('Composite: MemSequence', function() {
-    var getNode = function(...args:any[]) {
-        var _execute = stub();
+    let getNode = function(...args: any[]) {
+        let _execute = stub();
 
-        for (var i=0; i<arguments.length; i++) {
+        for (let i = 0; i < arguments.length; i++) {
             _execute.onCall(i).returns(arguments[i]);
         }
 
         return {'_execute': _execute};
-    }
+    };
 
     test('Name', function() {
         assert.equal(new MemSequence().name, 'MemSequence');
     });
 
     test('Open', function() {
-        var msequence = new MemSequence();
-        var tick = TickStub();
+        let msequence = new MemSequence();
+        let tick = TickStub();
         msequence.id = 'node1';
         msequence.open(tick);
 
-        var method = tick.blackboard.set.withArgs('runningChild', 0, 'tree1', 'node1')
+        let method = tick.blackboard.set.withArgs('runningChild', 0, 'tree1', 'node1');
         assert.isTrue(method.calledOnce);
-    })
+    });
 
     test('Success', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(SUCCESS);
 
-        var sequence = new MemSequence({children:[node1, node2, node3]});
-        var tick = TickStub();
+        let sequence = new MemSequence({children: [node1, node2, node3]});
+        let tick = TickStub();
         tick.blackboard.get.returns(0);
-        var status = sequence.tick(tick);
+        let status = sequence.tick(tick);
 
         assert.equal(status, SUCCESS);
         assert.isTrue(node1._execute.calledOnce);
@@ -46,15 +46,15 @@ suite('Composite: MemSequence', function() {
     });
 
     test('Failure', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(FAILURE);
-        var node4 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(FAILURE);
+        let node4 = getNode(SUCCESS);
 
-        var sequence = new MemSequence({children:[node1, node2, node3, node4]});
-        var tick = TickStub();
+        let sequence = new MemSequence({children: [node1, node2, node3, node4]});
+        let tick = TickStub();
         tick.blackboard.get.returns(0);
-        var status = sequence.tick(tick);
+        let status = sequence.tick(tick);
 
         assert.equal(status, FAILURE);
         assert.isTrue(node1._execute.calledOnce);
@@ -64,15 +64,15 @@ suite('Composite: MemSequence', function() {
     });
 
     test('Running', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(RUNNING);
-        var node4 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(RUNNING);
+        let node4 = getNode(SUCCESS);
 
-        var sequence = new MemSequence({children:[node1, node2, node3, node4]});
-        var tick = TickStub();
+        let sequence = new MemSequence({children: [node1, node2, node3, node4]});
+        let tick = TickStub();
         tick.blackboard.get.returns(0);
-        var status = sequence.tick(tick);
+        let status = sequence.tick(tick);
 
         assert.equal(status, RUNNING);
         assert.isTrue(node1._execute.calledOnce);
@@ -82,20 +82,20 @@ suite('Composite: MemSequence', function() {
     });
 
     test('Memory Tick', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(RUNNING, SUCCESS);
-        var node4 = getNode(FAILURE);
-        var node5 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(RUNNING, SUCCESS);
+        let node4 = getNode(FAILURE);
+        let node5 = getNode(SUCCESS);
 
-        var msequence = new MemSequence({children:[node1, node2, node3, node4, node5]});
-        var tick = TickStub();
+        let msequence = new MemSequence({children: [node1, node2, node3, node4, node5]});
+        let tick = TickStub();
         msequence.id = 'node1';
 
         // Execute two times, the first returning running, the second failure
         tick.blackboard.get.withArgs('runningChild', 'tree1', 'node1')
-                           .returns(0)
-        var status = msequence._execute(tick);
+                           .returns(0);
+        let status = msequence._execute(tick);
         assert.equal(status, RUNNING);
 
         assert.isTrue(
@@ -111,8 +111,8 @@ suite('Composite: MemSequence', function() {
 
         // second _execute
         tick.blackboard.get.withArgs('runningChild', 'tree1', 'node1')
-                           .returns(2)
-        
+                           .returns(2);
+
         status = msequence._execute(tick);
         assert.equal(status, FAILURE);
 
@@ -122,5 +122,5 @@ suite('Composite: MemSequence', function() {
         assert.isTrue(node3._execute.calledTwice);
         assert.isTrue(node4._execute.calledOnce);
         assert.isFalse(node5._execute.called);
-    })
+    });
 });

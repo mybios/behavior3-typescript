@@ -4,30 +4,30 @@ import Sequence from '../../src/composites/Sequence';
 import {FAILURE, SUCCESS, RUNNING} from '../../src/constants';
 
 suite('Composite: Sequence', function() {
-    var getNode = function(status) {
-        var _execute = stub();
+    let getNode = function(status) {
+        let _execute = stub();
         _execute.returns(status);
 
         return {'_execute': _execute};
-    }
+    };
 
-    var getTick = function() {
+    let getTick = function() {
         return {
             'tickNode': spy()
         };
-    }
+    };
 
     test('Name', function() {
         assert.equal(new Sequence().name, 'Sequence');
     });
 
     test('Success', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(SUCCESS);
 
-        var sequence = new Sequence({children:[node1, node2, node3]});
-        var status = sequence.tick(getTick());
+        let sequence = new Sequence({children: [node1, node2, node3]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, SUCCESS);
         assert.isTrue(node1._execute.calledOnce);
@@ -36,13 +36,13 @@ suite('Composite: Sequence', function() {
     });
 
     test('Failure', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(FAILURE);
-        var node4 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(FAILURE);
+        let node4 = getNode(SUCCESS);
 
-        var sequence = new Sequence({children:[node1, node2, node3, node4]});
-        var status = sequence.tick(getTick());
+        let sequence = new Sequence({children: [node1, node2, node3, node4]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, FAILURE);
         assert.isTrue(node1._execute.calledOnce);
@@ -52,13 +52,13 @@ suite('Composite: Sequence', function() {
     });
 
     test('Running', function() {
-        var node1 = getNode(SUCCESS);
-        var node2 = getNode(SUCCESS);
-        var node3 = getNode(RUNNING);
-        var node4 = getNode(SUCCESS);
+        let node1 = getNode(SUCCESS);
+        let node2 = getNode(SUCCESS);
+        let node3 = getNode(RUNNING);
+        let node4 = getNode(SUCCESS);
 
-        var sequence = new Sequence({children:[node1, node2, node3, node4]});
-        var status = sequence.tick(getTick());
+        let sequence = new Sequence({children: [node1, node2, node3, node4]});
+        let status = sequence.tick(getTick());
 
         assert.equal(status, RUNNING);
         assert.isTrue(node1._execute.calledOnce);

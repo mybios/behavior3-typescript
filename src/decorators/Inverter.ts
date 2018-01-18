@@ -12,8 +12,7 @@ import BaseNode from '../core/BaseNode';
  * @extends Decorator
  **/
 
-export default class Inverter extends Decorator
-{
+export default class Inverter extends Decorator {
 
     /**
      * Creates an instance of Inverter.
@@ -21,8 +20,7 @@ export default class Inverter extends Decorator
      * @param {BaseNode} params.child The child node.
      * @memberof Inverter
      */
-    constructor(child: BaseNode = null)
-    {
+    constructor(child: BaseNode = null) {
         super(
             child,
             'Inverter'
@@ -35,23 +33,19 @@ export default class Inverter extends Decorator
      * @param {Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        if (!this.child)
-        {
+    tick(tick: Tick) {
+        if (!this.child) {
             return ERROR;
         }
 
-        var status = this.child._execute(tick);
+        let status = this.child._execute(tick);
 
-        if (status == SUCCESS)
-        {
+        if (status == SUCCESS) {
             status = FAILURE;
-        } else if (status == FAILURE)
-        {
+        } else if (status == FAILURE) {
             status = SUCCESS;
         }
 
         return status;
     }
-};
+}

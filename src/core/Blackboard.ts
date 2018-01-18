@@ -1,4 +1,4 @@
-import BaseNode from "./BaseNode";
+import BaseNode from './BaseNode';
 
 /**
  * The Blackboard is the memory structure required by `BehaviorTree` and its
@@ -40,18 +40,16 @@ import BaseNode from "./BaseNode";
  **/
 
 export type Memory = { [key: string]: any };
-     
 
-export interface TreeMemory
-{
-    nodeMemory?: Memory,
-    openNodes?: BaseNode[],
-    traversalDepth?: number,
-    traversalCycle?: number,
+
+export interface TreeMemory {
+    nodeMemory?: Memory;
+    openNodes?: BaseNode[];
+    traversalDepth?: number;
+    traversalCycle?: number;
 }
 
-export default class Blackboard
-{
+export default class Blackboard {
 
     _baseMemory: Memory = {};
     _treeMemory: { [key: string]: TreeMemory } = {};
@@ -60,8 +58,7 @@ export default class Blackboard
      * @method initialize
      * @constructor
      **/
-    constructor()
-    {
+    constructor() {
     }
 
     /**
@@ -73,10 +70,8 @@ export default class Blackboard
      * @return {Object} The tree memory.
      * @protected
      **/
-    _getTreeMemory(treeScope: string)
-    {
-        if (!this._treeMemory[treeScope])
-        {
+    _getTreeMemory(treeScope: string) {
+        if (!this._treeMemory[treeScope]) {
             this._treeMemory[treeScope] = {
                 'nodeMemory': {},
                 'openNodes': [],
@@ -97,11 +92,9 @@ export default class Blackboard
      * @return {Object} The node memory.
      * @protected
      **/
-    _getNodeMemory(treeMemory: TreeMemory, nodeScope: string)
-    {
-        var memory = treeMemory.nodeMemory;
-        if (!memory[nodeScope])
-        {
+    _getNodeMemory(treeMemory: TreeMemory, nodeScope: string) {
+        let memory = treeMemory.nodeMemory;
+        if (!memory[nodeScope]) {
             memory[nodeScope] = {};
         }
 
@@ -122,16 +115,13 @@ export default class Blackboard
      * @return {Object} A memory object.
      * @protected
      **/
-    _getMemory(treeScope?: string, nodeScope?: string)
-    {
-        var memory = this._baseMemory;
+    _getMemory(treeScope?: string, nodeScope?: string) {
+        let memory = this._baseMemory;
 
-        if (treeScope)
-        {
+        if (treeScope) {
             memory = this._getTreeMemory(treeScope);
 
-            if (nodeScope)
-            {
+            if (nodeScope) {
                 memory = this._getNodeMemory(memory, nodeScope);
             }
         }
@@ -155,9 +145,8 @@ export default class Blackboard
      *                           memory.
      * @param {String} nodeScope The node id if accessing the node memory.
      **/
-    set(key: string, value: any, treeScope?: string, nodeScope?: string)
-    {
-        var memory = this._getMemory(treeScope, nodeScope);
+    set(key: string, value: any, treeScope?: string, nodeScope?: string) {
+        let memory = this._getMemory(treeScope, nodeScope);
         memory[key] = value;
     }
 
@@ -177,9 +166,8 @@ export default class Blackboard
      * @param {String} nodeScope The node id if accessing the node memory.
      * @return {Object} The value stored or undefined.
      **/
-    get(key: string, treeScope?: string, nodeScope?: string)
-    {
-        var memory = this._getMemory(treeScope, nodeScope);
+    get(key: string, treeScope?: string, nodeScope?: string) {
+        let memory = this._getMemory(treeScope, nodeScope);
         return memory[key];
     }
-};
+}

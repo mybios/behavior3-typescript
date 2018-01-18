@@ -6,22 +6,22 @@ import BaseNode from '../../src/core/BaseNode';
 // load and dump JSON model
 
 suite('Core: Behavior Tree', function() {
-    var getBlackboard = function() {
+    let getBlackboard = function() {
         return {
             'set': spy(),
             'get': stub()
-        }
-    }
+        };
+    };
 
-    var getClosableNode = function(id) {
+    let getClosableNode = function(id) {
         return {
             'id': id,
             '_close': spy()
-        }
-    }
+        };
+    };
 
     test('Initialization', function() {
-        var tree = new BehaviorTree();
+        let tree = new BehaviorTree();
 
         assert.isOk(tree.id);
         assert.isOk(tree.title);
@@ -31,10 +31,10 @@ suite('Core: Behavior Tree', function() {
     });
 
     test('Call root', function() {
-        var tree = new BehaviorTree();
-        var node = {'_execute': stub()};
-        var blackboard = getBlackboard();
-        var target = {}
+        let tree = new BehaviorTree();
+        let node = {'_execute': stub()};
+        let blackboard = getBlackboard();
+        let target = {};
 
         blackboard.get.withArgs('openNodes', 'tree1')
                       .returns([]);
@@ -47,12 +47,12 @@ suite('Core: Behavior Tree', function() {
     });
 
     test('Populate blackboard', function() {
-        var tree = new BehaviorTree();
-        var blackboard = getBlackboard();
-        var target = {}
-        var node = {'_execute': function(tick) {
+        let tree = new BehaviorTree();
+        let blackboard = getBlackboard();
+        let target = {};
+        let node = {'_execute': function(tick) {
             tick._enterNode('node1'),
-            tick._enterNode('node2')
+            tick._enterNode('node2');
         }};
 
         blackboard.get.withArgs('openNodes', 'tree1')
@@ -62,7 +62,7 @@ suite('Core: Behavior Tree', function() {
         tree.root = node as BaseNode;
         tree.tick(target, blackboard);
 
-        var method = blackboard.set.withArgs('openNodes', ['node1', 'node2'], 'tree1');
+        let method = blackboard.set.withArgs('openNodes', ['node1', 'node2'], 'tree1');
         assert.isTrue(method.calledOnce);
 
         method = blackboard.set.withArgs('nodeCount', 2, 'tree1');
@@ -70,19 +70,19 @@ suite('Core: Behavior Tree', function() {
     });
 
     test('Close opened nodes', function() {
-        var tree = new BehaviorTree();
-        var blackboard = getBlackboard();
+        let tree = new BehaviorTree();
+        let blackboard = getBlackboard();
 
 
-        var node1 = getClosableNode('node1');
-        var node2 = getClosableNode('node2');
-        var node3 = getClosableNode('node3');
-        var node4 = getClosableNode('node4');
-        var node5 = getClosableNode('node5');
-        var node6 = getClosableNode('node6');
-        var node7 = getClosableNode('node7');
+        let node1 = getClosableNode('node1');
+        let node2 = getClosableNode('node2');
+        let node3 = getClosableNode('node3');
+        let node4 = getClosableNode('node4');
+        let node5 = getClosableNode('node5');
+        let node6 = getClosableNode('node6');
+        let node7 = getClosableNode('node7');
 
-        var root = {'_execute': function(tick) {
+        let root = {'_execute': function(tick) {
             tick._enterNode(node1);
             tick._enterNode(node2);
             tick._enterNode(node3);
@@ -107,15 +107,15 @@ suite('Core: Behavior Tree', function() {
     });
 
     test('Does not close opened nodes', function() {
-        var tree = new BehaviorTree();
-        var blackboard = getBlackboard();
+        let tree = new BehaviorTree();
+        let blackboard = getBlackboard();
 
-        var node1 = getClosableNode('node1');
-        var node2 = getClosableNode('node2');
-        var node3 = getClosableNode('node3');
-        var node4 = getClosableNode('node4');
+        let node1 = getClosableNode('node1');
+        let node2 = getClosableNode('node2');
+        let node3 = getClosableNode('node3');
+        let node4 = getClosableNode('node4');
 
-        var root = {'_execute': function(tick) {
+        let root = {'_execute': function(tick) {
             tick._enterNode(node1);
             tick._enterNode(node2);
             tick._enterNode(node3);

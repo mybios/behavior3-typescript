@@ -8,7 +8,7 @@ suite('Core: Decorator', function() {
     });
 
     test('Initialization', function() {
-        var node = new Decorator({child:'child1'});
+        let node = new Decorator({child: 'child1'});
 
         assert.isOk(node.id);
         assert.isDefined(node.title);
@@ -18,9 +18,9 @@ suite('Core: Decorator', function() {
     });
 
     test('Empty constructor', function() {
-        var node = new Decorator();
+        let node = new Decorator();
 
         assert.isDefined(node.child);
         assert.equal(node.child, null);
-    })
+    });
 });

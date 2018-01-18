@@ -1,6 +1,6 @@
-import BehaviorTree from "./BehaviorTree";
-import Blackboard from "./Blackboard";
-import BaseNode from "./BaseNode";
+import BehaviorTree from './BehaviorTree';
+import Blackboard from './Blackboard';
+import BaseNode from './BaseNode';
 
 /**
  * A new Tick object is instantiated every tick by BehaviorTree. It is passed
@@ -20,8 +20,7 @@ import BaseNode from "./BaseNode";
  * @class Tick
  **/
 
-export default class Tick
-{
+export default class Tick {
 
 
     /**
@@ -76,8 +75,7 @@ export default class Tick
      * @method initialize
      * @constructor
      **/
-    constructor()
-    {
+    constructor() {
         // set by BehaviorTree
 
     }
@@ -88,8 +86,7 @@ export default class Tick
      * @param {Object} node The node that called this method.
      * @protected
      **/
-    _enterNode(node: BaseNode)
-    {
+    _enterNode(node: BaseNode) {
         this._nodeCount++;
         this._openNodes.push(node);
 
@@ -102,8 +99,7 @@ export default class Tick
      * @param {Object} node The node that called this method.
      * @protected
      **/
-    _openNode(node: BaseNode)
-    {
+    _openNode(node: BaseNode) {
         // TODO: call debug here
     }
 
@@ -113,8 +109,7 @@ export default class Tick
      * @param {Object} node The node that called this method.
      * @protected
      **/
-    _tickNode(node: BaseNode)
-    {
+    _tickNode(node: BaseNode) {
         // TODO: call debug here
     }
 
@@ -124,8 +119,7 @@ export default class Tick
      * @param {Object} node The node that called this method.
      * @protected
      **/
-    _closeNode(node: BaseNode)
-    {
+    _closeNode(node: BaseNode) {
         // TODO: call debug here
         this._openNodes.pop();
     }
@@ -136,8 +130,7 @@ export default class Tick
      * @param {Object} node The node that called this method.
      * @protected
      **/
-    _exitNode(node: BaseNode)
-    {
+    _exitNode(node: BaseNode) {
         // TODO: call debug here
     }
-};
+}

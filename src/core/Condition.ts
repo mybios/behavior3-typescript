@@ -9,19 +9,17 @@ import { CONDITION } from '../constants';
  * @extends BaseNode
  **/
 
-export default class Condition extends BaseNode
-{
+export default class Condition extends BaseNode {
 
     /**
      * Creates an instance of Condition.
-     * @param {Object} options 
+     * @param {Object} options
      * @param {Object} options.name Node name. Default to `Condition`.
      * @param {String} options.title
      * @param {Object} options.properties
      * @memberof Condition
      */
-    constructor(name = 'Condition', title = name, properties: IProperties = {})
-    {
+    constructor(name = 'Condition', title = name, properties: IProperties = {}) {
         super(
             CONDITION,
             name,
@@ -31,4 +29,4 @@ export default class Condition extends BaseNode
         );
     }
 
-};
+}

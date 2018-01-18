@@ -10,8 +10,7 @@ import Tick from '../core/Tick';
  * @extends Action
  **/
 
-export default class Wait extends Action
-{
+export default class Wait extends Action {
 
     endTime: number;
     /**
@@ -20,8 +19,7 @@ export default class Wait extends Action
      * @param {Number} settings.milliseconds Maximum time, in milliseconds, a child can execute.
      * @memberof Wait
      */
-    constructor(milliseconds = 0)
-    {
+    constructor(milliseconds = 0) {
         super(
             'Wait',
             'Wait <milliseconds>ms',
@@ -36,9 +34,8 @@ export default class Wait extends Action
      * @method open
      * @param {Tick} tick A tick instance.
      **/
-    open(tick: Tick)
-    {
-        var startTime = (new Date()).getTime();
+    open(tick: Tick) {
+        let startTime = (new Date()).getTime();
         tick.blackboard.set('startTime', startTime, tick.tree.id, this.id);
     }
 
@@ -48,16 +45,14 @@ export default class Wait extends Action
      * @param {Tick} tick A tick instance.
      * @return {Constant} A state constant.
      **/
-    tick(tick: Tick)
-    {
-        var currTime = (new Date()).getTime();
-        var startTime = tick.blackboard.get('startTime', tick.tree.id, this.id);
+    tick(tick: Tick) {
+        let currTime = (new Date()).getTime();
+        let startTime = tick.blackboard.get('startTime', tick.tree.id, this.id);
 
-        if (currTime - startTime > this.endTime)
-        {
+        if (currTime - startTime > this.endTime) {
             return SUCCESS;
         }
 
         return RUNNING;
     }
-};
+}

@@ -13,7 +13,7 @@ import { DECORATOR } from '../constants';
  *
  *     // Inherit from Decorator, using the util function Class.
  *     class Inverter extends b3.Decorator {
- *       
+ *
  *       constructor(){
  *         super({name: 'Invereter'});
  *       }
@@ -41,19 +41,17 @@ import { DECORATOR } from '../constants';
  * @extends BaseNode
  **/
 
-export default class Decorator extends BaseNode
-{
+export default class Decorator extends BaseNode {
 
     /**
      * Creates an instance of Decorator.
-     * @param {Object} options 
+     * @param {Object} options
      * @param {String} options.name Node name. Default to `Decorator`.
-     * @param {String} options.title 
-     * @param {Object} options.properties 
+     * @param {String} options.title
+     * @param {Object} options.properties
      * @memberof Decorator
      */
-    constructor(child: BaseNode = null, name = 'Decorator', title = name, properties: IProperties = {})
-    {
+    constructor(child: BaseNode = null, name = 'Decorator', title = name, properties: IProperties = {}) {
         super(
             DECORATOR,
             name,
@@ -64,4 +62,4 @@ export default class Decorator extends BaseNode
         this.child = child;
     }
 
-};
+}

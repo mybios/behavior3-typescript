@@ -10,15 +10,13 @@ import Tick from '../core/Tick';
  * @extends Action
  **/
 
-export default class Succeeder extends Action
-{
+export default class Succeeder extends Action {
 
     /**
      * Creates an instance of Succeeder.
      * @memberof Succeeder
      */
-    constructor()
-    {
+    constructor() {
         super('Succeeder');
     }
 
@@ -28,8 +26,7 @@ export default class Succeeder extends Action
      * @param {b3.Tick} tick A tick instance.
      * @return {Constant} Always return `SUCCESS`.
      **/
-    tick(tick: Tick)
-    {
+    tick(tick: Tick) {
         return SUCCESS;
     }
-};
+}

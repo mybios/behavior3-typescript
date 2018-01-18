@@ -10,12 +10,12 @@ suite('Decorator: MaxTime', function() {
     });
 
     test('Failure test', function() {
-        var tick = TickStub();
-        var child = {'_execute': stub()};
+        let tick = TickStub();
+        let child = {'_execute': stub()};
         child._execute.returns(RUNNING);
 
-        var node = new MaxTime({maxTime: 15, child});
-        var startTime = (new Date()).getTime();
+        let node = new MaxTime({maxTime: 15, child});
+        let startTime = (new Date()).getTime();
 
         tick.blackboard.get.returns(startTime - 14);
         assert.equal(node.tick(tick), RUNNING);
@@ -25,12 +25,12 @@ suite('Decorator: MaxTime', function() {
     });
 
     test('Success test', function() {
-        var tick = TickStub();
-        var child = {'_execute': stub()};
+        let tick = TickStub();
+        let child = {'_execute': stub()};
         child._execute.returns(SUCCESS);
 
-        var node = new MaxTime({maxTime: 15, child});
-        var startTime = (new Date()).getTime();
+        let node = new MaxTime({maxTime: 15, child});
+        let startTime = (new Date()).getTime();
 
         tick.blackboard.get.returns(startTime - 14);
         assert.equal(node.tick(tick), SUCCESS);
